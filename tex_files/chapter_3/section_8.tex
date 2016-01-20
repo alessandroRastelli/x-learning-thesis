@@ -1,12 +1,12 @@
 \section{AWS cost}
 \label{sec:AWS cost}
+As already mentioned this paragraph will be dedicated to the analysis of the costs of the various services described above.
+In particular the following tables contain data collected from price lists of AWS, then these will be processed to estimate the monthly cost and yearly need for the realization of the entire platform.
+The following statements are based about some assumptions resulting from the use case of interest and allow a more rapid interpretation:
 
-Nei capitoli successivi vedremo quali servizi AWS sono stati adottati e soprattuto in che modo sono stati sfruttati nella creazione della piattaforma, come accennato in questa parte ci concentreremo invece solo sull’analisi dei costi.
-Le tabelle seguenti conterranno i dati raccolti dai listini prezzi di AWS, questi successivamente saranno elaborati per stimare il costo mensile e annuale necessario per la realizzazione dell’intera piattaforma.
-I dati seguenti si basano su alcune assunzioni derivanti dal caso d’uso d’interesse e permettono una interpretazione più rapida e comprensibile:
 \begin{itemize}
-\item I video durano in media 5 minuti
-\item Le dimensioni dei video cambiano a seconda della qualità :
+\item The videos last on average 5 minutes
+\item The size of the video change depending on the quality:
 
 \begin{table}[h!]
 \centering
@@ -41,7 +41,7 @@ I dati seguenti si basano su alcune assunzioni derivanti dal caso d’uso d’in
 \end{table}
 
 
-\item Il costo della transcodifica e quindi del servizio dell’Elastic Transcoder è di:
+\item The cost of transcoding service provided by Elastic Transcoder is:
 
 \begin{table}[h!]
 \centering
@@ -76,8 +76,8 @@ I dati seguenti si basano su alcune assunzioni derivanti dal caso d’uso d’in
 \end{table}
 
 
-\item Il costo dello storage dei video su S3 è di 0.03\$/GB
-\item Il costo per il trasferimento è di :
+\item The cost of storage of video on S3 is 0.03\$/GB
+\item The cost for the network traffic is:
 
 
 \begin{table}[h!]
@@ -104,8 +104,9 @@ I dati seguenti si basano su alcune assunzioni derivanti dal caso d’uso d’in
 
 \end{itemize}
 
-Raccolti i costi dei vari servizi utilizzati in X-Learning, come accennato precedentemente ora ci focalizziamo nel calcolo di alcune stime sulla base dei numero dei video e del numero di visualizzazioni:
-Costo per lo storage su S3 e la transcodifica è di:
+Collected the costs of the various services used in e-learning, as mentioned previously now we focus in the calculation of some estimates based on the number of video and the number of views.
+
+Total cost for storage on S3 and transcoding is:
 
 
 \begin{table}[h!]
@@ -128,7 +129,7 @@ Costo per lo storage su S3 e la transcodifica è di:
 \label{table:1}
 \end{table}
 
-Costo dello Streaming di qualità SD è di:
+Cost of video streaming in standard definition(SD) is:
 
 \begin{table}[h!]
 \begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}| }
@@ -152,7 +153,7 @@ Costo dello Streaming di qualità SD è di:
 \end{table}
 
 
-Costo dello streaming di qualità HD è di:
+Cost of video streaming in high definition(HD) is:
 
 \begin{table}
 \centering 
@@ -176,8 +177,7 @@ Costo dello streaming di qualità HD è di:
 \label{table:1}
 \end{table}
 
-I dati appena illustrati possono essere sintetizzati attraverso l’ausilio di alcuni grafici:
-
+The data illustrated above can be synthesized through the use of few charts:
 
 \begin{figure}[htb]
  \centering
