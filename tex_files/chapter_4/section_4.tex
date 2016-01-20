@@ -1,14 +1,23 @@
-\section{Amazon SNS and SQS}
-\label{sec:Amazon SNS and SQS}
+\section{X-Learning organization}
+\label{sec:x-learning_organization}
 
-  http://docs.aws.amazon.com/sns/latest/dg/welcome.html
-Amazon Simple Notification Service (Amazon SNS) is a web service that coordinates and manages the delivery or sending of messages to subscribing endpoints or clients. In Amazon SNS, there are two types of clients—publishers and subscribers—also referred to as producers and consumers. Publishers communicate asynchronously with subscribers by producing and sending a message to a topic, which is a logical access point and communication channel. Subscribers (i.e., web servers, email addresses, Amazon SQS queues, AWS Lambda functions) consume or receive the message or notification over one of the supported protocols (i.e., Amazon SQS, HTTP/S, email, SMS, Lambda) when they are subscribed to the topic.
-{\color{red} In X-Learning platform the Amazon SNS service is use together the Amazon SQS.}
- Amazon SQS is a distributed queue system that enables web service applications to quickly and reliably queue messages that one component in the application generates to be consumed by another component. A queue is a temporary repository for messages that are awaiting processing.
-Using Amazon SQS, you can decouple the components of an application so they run independently, with Amazon SQS easing message management between components. Any component of a distributed application can store messages in a fail-safe queue. Messages can contain up to 256 KB of text in any format. Any component can later retrieve the messages programmatically using the Amazon SQS API.
-
-Amazon SQS ensures delivery of each message at least once, and supports multiple readers and writers interacting with the same queue. A single queue can be used simultaneously by many distributed application components, with no need for those components to coordinate with each other to share the queue.
-One of the resulting tradeoffs is that SQS does not guarantee first in, first out delivery of messages.
+  Durante la fase iniziale di analisi e progettazione si è evidenziata la necessità di suddividere il lavoro in due macro-blocchi public e admin. L’idea base è stata quella di delegare tutti compiti di creazione, gestione al lato admin e delegare invece la gestione della fruizione dei contenuti al lato client.
+Inoltre questa scelta è dettata dalla volontà di rendere indipendenti tra di loro i vari componenti per permettere una maggiore flessibilità e garantire anche maggiore sicurezza posizionando per esempio il client in un server diverso da quello admin.
+Il risultato finale ottenuto è quello di due piattaforme totalmente indipendenti che possono coesistere tra loro, permettendo massima autonomia e garantendo un elevato indice di coesione.
 
 
-{\color{red} For X-learning platform the order is not important. Indeed when Elastic Transcoder job completed a message was product and send and a this time the subscriber SQS receive the notification and insert message into queue. X-learning server-side read and processed each SQS message to publish the course.}
+\begin{figure}[htbp] %  figure placement: here, top, bottom
+ \centering
+ \includegraphics[width=0.5\linewidth]{images/chapter4/admin.png}\hfill
+ \caption[admin hierarchy]{Admin hierarchy}
+ \label{fig:fourV}
+\end{figure}
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom
+ \centering
+ \includegraphics[width=0.5\linewidth]{images/chapter4/client.png}\hfill
+ \caption[Client hierarchy]{Client hierarchy}
+ \label{fig:fourV}
+\end{figure}
+
+\newpage
