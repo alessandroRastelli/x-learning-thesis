@@ -11,7 +11,13 @@ Terminato il processo di upload appena descritto inizia la fase di transcodifica
  \label{fig:fourV}
 \end{figure}
 
-Entrando nel dettaglio la transcodifica inizia al termine del MultipartUpload quando il server tramite API inizia la comunicazione con il servizio di ElasticTranscoder e crea quindi un nuovo JOB che verra inserito nella Pipeline specificata.
+Entrando nel dettaglio la transcodifica inizia al termine del MultipartUpload quando il server chiama API PUT /transcoders/createJob che prende in input i seguenti paramteri :
+\begin{itemize}
+      \item file\_name ovvero il file name che deve essere preso dal bucket per poi essere trasformato
+      \item path ovvero il percorso remoto su cui effettuare lo storage quando termina la transcodifica
+  \end{itemize}
+
+ Tale API inizia la comunicazione con il servizio di ElasticTranscoder e crea quindi un nuovo JOB che verra inserito nella Pipeline specificata nel campo PipelineId.
 \begin{lstlisting}[language=html]
   
 Transcoder.createJob = function (file_name,path,callback){
