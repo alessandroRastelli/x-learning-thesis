@@ -1,75 +1,69 @@
-\section{HLS and VideoJS}
-\label{sec:HLS and VideoJS}
-
-https://github.com/videojs/video.js
-https://github.com/videojs/videojs-contrib-hls
-
-HTTP Live Streaming (HLS) has become a de-facto standard for streaming video on mobile devices. In order to use this standard in X-Learning platform i exploit the Video.js that is s a free and open source library.
-Video.js is a web video player built from the ground up for an HTML5 world. It supports HTML5 and Flash video, as well as YouTube and Vimeo (through plugins). It supports video playback on desktops and mobile devices. This project was started mid 2010, and the player is now used on over 200,000 websites.
-HTTP Live Streaming (HLS) has standard for streaming video thanks to its native support on iOS and Android. There are a number of reasons independent of platform to recommend the format, though:
-Supports (client-driven) adaptive bitrate selection
-Delivered over standard HTTP ports
-Simple, text-based manifest format
-No proprietary streaming servers required
-Unfortunately, all the major desktop browsers except for Safari are missing HLS support. That leaves web developers in the unfortunate position of having to maintain alternate renditions of the same video and potentially having to forego HTML-based video entirely to provide the best desktop viewing experience.
-This tech attempts to address that situation by providing a polyfill for HLS on browsers that have Flash support. You can deploy a single HLS stream, code against the regular HTML5 video APIs, and create a fast, high-quality video experience across all the big web device categories.
-The videojs-hls tech use in my project  is still working towards a 1.0 release so it may not fit your requirements today. Specifically, there is no support for:
-Alternate audio and video tracks
-Subtitles
-Segment codecs other than H.264 with AAC audio
-Internet Explorer < 10
-
-\subsection{Adaptive Switching Behavior}
-\label{sec:Adaptive Switching Behavior}
-
-https://github.com/videojs/videojs-contrib-hls/blob/master/docs/bitrate-switching.md
-
-
-The HLS tech tries to ensure the highest-quality viewing experience possible, given the available bandwidth and encodings. This doesn't always mean using the highest-bitrate rendition available-- if the player is 300px by 150px, it would be a big waste of bandwidth to download a 4k stream. By default, the player attempts to load the highest-bitrate variant that is less than the most recently detected segment bandwidth, with one condition: if there are multiple variants with dimensions greater than the current player size, it will only switch up one size greater than the current player size.
-If you're the visual type, the whole process is illustrated below. Whenever a new segment is downloaded, we calculate the download bitrate based on the size of the segment and the time it took to download:
-
-
-
-\begin{figure}[htb] %  figure placement: here, top, bottom
+\section{Strongloop Loopback}
+\label{sec:strongloop_loopback}
+This section provides an overview of LoopBack.
+\newline
+Built on top of the open source LoopBack framework, the StrongLoop API Platform is the first end-to-end platform for the full API lifecycle that allows to visually develop REST APIs in Node and get them connected to new and legacy data. In addition, the API Platform features built-in mBaaS features like push and offline sync, plus graphical tools with DevOps features for clustering, profiling and monitoring Node apps.
+\newline
+LoopBack generates model API from the models schemas, to let CRUD operations on models.
+LoopBack models automatically have a standard set of HTTP endpoints that provide REST APIs for create, read, update, and delete (CRUD) operations on model data:
+\begin{itemize}
+\item \textbf{POST /Model} — Create a new instance of the model and persist it into the data source.
+\item \textbf{GET /Model} — Find all instances of the model matched by filter from the data source.
+\item \textbf{PUT /Model} — Update an existing model instance or insert a new one into the data source.
+\item \textbf{PUT /Model/id} — Update attributes for a model instance and persist it into the data source.
+\item \textbf{GET /Model/id} — Find a model instance by id from the data source.
+\item \textbf{DELETE /Model/id } — Delete a model instance by id from the data source.
+\item \textbf{GET /Model/count} — Count instances of the model matched by where from the data source.
+\item \textbf{GET /Model/findOne} — Find first instance of the model matched by filter from the data source.
+\item \textbf{POST /Model/update} — Update instances of the model matched by where from that data source.
+\end{itemize}
+\begin{figure}[htb]
  \centering
- \includegraphics[width=1.0\linewidth]{images/chapter3/bitrate-switching-1.png}\hfill
- \caption[xxxxxxxxx]{xxxxxxxxxxxxx}
- \label{fig:fourV}
+ \includegraphics[width=0.9\linewidth]{images/chapter3/loopback_architecture.jpg}\hfill
+ \caption[Loopback Architecture]{Loopback Architecture}
+ \label{fig:loopback_architecture}
 \end{figure}
-
-
-First, we filter out all the renditions that have a higher bitrate than the new measurement:
-
-
-\begin{figure}[htb] %  figure placement: here, top, bottom
- \centering
- \includegraphics[width=1.0\linewidth]{images/chapter3/bitrate-switching-2.png}\hfill
- \caption[xxxxxxxxx]{xxxxxxxxxxxxx}
- \label{fig:fourV}
-\end{figure}
-
-Then we get rid of any renditions that are bigger than the current player dimensions:
-
-
-\begin{figure}[htb] %  figure placement: here, top, bottom
- \centering
- \includegraphics[width=1.0\linewidth]{images/chapter3/bitrate-switching-3.png}\hfill
- \caption[xxxxxxxxx]{xxxxxxxxxxxxx}
- \label{fig:fourV}
-\end{figure}
-
-We don't want to signficant quality drop just because your player is one pixel too small, so we add back in the next highest resolution. The highest bitrate rendition that remains is the one that gets used:
-
-
-\begin{figure}[htb] %  figure placement: here, top, bottom
- \centering
- \includegraphics[width=1.0\linewidth]{images/chapter3/bitrate-switching-4.png}\hfill
- \caption[xxxxxxxxx]{xxxxxxxxxxxxx}
- \label{fig:fourV}
-\end{figure}
-
-
-If it turns out no rendition is acceptable based on the filtering described above, the first encoding listed in the master playlist will be used.
-
-
-\newpage
+A LoopBack model represents data in backend systems such as databases, and by default has both Node and REST APIs. Additionally, developer can add functionality such as validation rules and business logic to models. Every LoopBack application has a set of predefined built-in models such as User, Role, and Application. Developer can extend built-in models to suit application’s needs.
+\newline
+The model JSON file defines models, relations between models, and access to models.
+\begin{lstlisting}[language=json]
+{
+  {
+  "name": "ModelName", // See Top-level properties below "description": "A Customer model representing our customers.", "base": "User",
+  "idInjection": false,
+  "strict": true,
+  "options": { ... }, // See Options below
+  "properties": { ... }, // See Properties below
+  "validations": [...], // See Validations below
+  "relations": {...}, // See Relations below
+  "acls": [...], // See ACLs below
+  "scopes": {...}, // See Scopes below
+   "http": {"path": "/foo/mypath"}
+  }
+}
+\end{lstlisting}
+Where:
+\begin{itemize}
+\item “name”: Name of the model.
+\item “description”: Optional description of the model.
+\item “base”: Name of another model that this model extends. The model will “inherit” properties and methods of the base model.
+\item “IdInjection”: Whether to automatically add an id property to the model:
+\begin{itemize}
+\item true - id property is added to the model automatically. This is the default.
+\item false - id property is not added to the model.
+\end{itemize}
+\item “strict”: Specifies whether the model accepts only predefined properties or not. One of:
+\begin{itemize}
+\item true - Only properties defined in the model are accepted. Used to ensure that the model accepts only predefined properties.
+\item false - The model is an open model and accepts all properties, including ones not predefined in the model. This mode is useful to store free-form JSON data to a schema-less database such as MongoDB.
+\item validate - The unknown properties will be reported as validation errors.
+\item throw - Throws an exception if properties not defined for the model are used in an operation.
+\item undefined - Defaults to false unless the data source is backed by a relational database such as Oracle or MySQL.
+\item “options”: JSON object that specifies model options.
+\item “properties”: JSON object that specifies the properties in the model.
+\item “relations”: Object containing relation names and relation definitions.
+\item “acls”: Set of ACL specifications that describes access control for the model.
+\end{itemize}
+\end{itemize}
+The API can be extended: the developer can add remote functions to models or add hooks to existing API to add custom behavior before and/or after the API handler (to pre-process the re-quest and/or post-process the response). The resulting API is RESTful, cookie free, signed by authentica- tion token. By default, applications have a built-in model that represents a user, with properties username, email and password and role for authentica- tion and authorization. Loopback also introduces an indirection layer that allows to choose from almost all particular DBMS to be used.
+In Chapter Two the technologies used for developing this work, have been described. Each technology has been described in realtion to its function and its use in the project.

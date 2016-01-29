@@ -1,14 +1,14 @@
-\section{Amazon SNS and SQS}
-\label{sec:Amazon SNS and SQS}
-
-  http://docs.aws.amazon.com/sns/latest/dg/welcome.html
-Amazon Simple Notification Service (Amazon SNS) is a web service that coordinates and manages the delivery or sending of messages to subscribing endpoints or clients. In Amazon SNS, there are two types of clients—publishers and subscribers—also referred to as producers and consumers. Publishers communicate asynchronously with subscribers by producing and sending a message to a topic, which is a logical access point and communication channel. Subscribers (i.e., web servers, email addresses, Amazon SQS queues, AWS Lambda functions) consume or receive the message or notification over one of the supported protocols (i.e., Amazon SQS, HTTP/S, email, SMS, Lambda) when they are subscribed to the topic.
-{\color{red} In X-Learning platform the Amazon SNS service is use together the Amazon SQS.}
- Amazon SQS is a distributed queue system that enables web service applications to quickly and reliably queue messages that one component in the application generates to be consumed by another component. A queue is a temporary repository for messages that are awaiting processing.
-Using Amazon SQS, you can decouple the components of an application so they run independently, with Amazon SQS easing message management between components. Any component of a distributed application can store messages in a fail-safe queue. Messages can contain up to 256 KB of text in any format. Any component can later retrieve the messages programmatically using the Amazon SQS API.
-
-Amazon SQS ensures delivery of each message at least once, and supports multiple readers and writers interacting with the same queue. A single queue can be used simultaneously by many distributed application components, with no need for those components to coordinate with each other to share the queue.
-One of the resulting tradeoffs is that SQS does not guarantee first in, first out delivery of messages.
-
-
-{\color{red} For X-learning platform the order is not important. Indeed when Elastic Transcoder job completed a message was product and send and a this time the subscriber SQS receive the notification and insert message into queue. X-learning server-side read and processed each SQS message to publish the course.}
+\section{NodeJS}
+\label{sec:nodejs}
+This section provides an overview of NodeJs.
+Node.js is an open source, cross-platform runtime environment for server- side and networking applications. Node.js applications are written in JavaScript and can be run within the Node.js runtime on OS X, Microsoft Windows, Linux, FreeBSD, NonStop,IBM AIX, IBM System z and IBM i. Its work is hosted and supported by the Node.js Foundation,a Collaborative Project at Linux Foundation.
+\newline
+Node.js provides an event-driven architecture and a non-blocking I/O API that optimizes an application’s throughput and scalability. These tech- nologies are commonly used for real-time web applications.
+\newline
+Node.js uses the Google V8 JavaScript engine to execute code, and a large percentage of the basic modules are written in JavaScript. Node.js contains a built-in library to allow applications to act as a Web server without software such as Apache HTTP Server, Nginx or IIS.
+\newline
+Node.js allows the creation of web servers and networking tools, using JavaScript and a collection of “modules” that handle various core functional- ity. Modules handle file system I/O, networking (HTTP, TCP, UDP, DNS, or TLS/SSL), binary data (buffers), cryptography functions, data streams , and other core functions. Node’s modules have a simple and elegant API, reducing the complexity of writing server applications.
+Frameworks can be used to accelerate the development of applications, and common frameworks are Express.js, Socket.IO and Connect. Node.js applications can run on Microsoft Windows, Unix, NonStop and Mac OS X servers. Node.js applications can alternatively be written with CoffeeScript (an alternative form of JavaScript), Dart or Microsoft TypeScript (strongly typed forms of JavaScript), or any language that can compile to JavaScript.
+Node.js is primarily used to build network programs such as web servers, making it similar to PHP and Python. The biggest difference between PHP and Node.js is that PHP is a blocking language (commands execute only after the previous command has completed), while Node.js is a non-blocking language (commands execute in parallel, and use callbacks to signal completion).
+\newline
+Node.js brings event-driven programming to web servers, enabling development of fast web servers in JavaScript. Developers can create highly scalable servers without using threading, by using a simplified model of event- driven programming that uses callbacks to signal the completion of a task. Node.js was created because concurrency is difficult in many server-side programming languages, and often leads to poor performance. Node.js connects the ease of a scripting language (JavaScript) with the power of Unix network programming.

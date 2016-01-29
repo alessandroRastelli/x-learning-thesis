@@ -1,34 +1,30 @@
-\section{Amazon Elastic Transcoder}
-\label{sec:Amazon Elastic Transcoder}
-
-  Amazon Elastic Transcoder lets you convert media files that you have stored in Amazon S3 into media files in the formats required by consumer playback devices. For example, you can convert large, high-quality digital media files into formats that users can play back on mobile devices, tablets, web browsers, and connected televisions.
-Amazon Elastic Transcoder lets you convert media files that you have stored in Amazon Simple Storage Service (Amazon S3) into media files in the formats required by consumer playback devices. For example, you can convert large, high-quality digital media files into formats that users can play back on mobile devices, tablets, web browsers, and connected televisions.
-
-\begin{figure}[htb] %  figure placement: here, top, bottom
- \centering
- \includegraphics[width=1.0\linewidth]{images/chapter3/aws_transcoder.jpg}\hfill
- \caption[The Elastic Transcoder Lifecycle]{The Elastic Transcoder Lifecycle}
- \label{fig:fourV}
-\end{figure}
-
-Elastic Transcoder has four components:
+\section{Polymer}
+\label{sec:polymer}
+This section there will be an overview of Polymer. Polymer provides a thin layer of API on top of Web Components and several powerful features, such as custom events and delegation, mixins, accessors and component life- cycle functions, to facilitate the creation of Web Components. Polymer does this by:
 \begin{itemize}
-
-\item \textbf{Jobs} do the work of transcoding. Each job converts one file into up to 30 formats. For example, if you want to convert a media file into six different formats, you can create files in all six formats by creating a single job. When you create a job, you specify the name of the file that you want to transcode, the names that you want Elastic Transcoder to give to the transcoded files, and several other settings. For each format that you want to transcode into, you also specify a template, known as a preset (see below), that contains the audio and video settings that you want to use for the transcoded file or files.
-
-\item \textbf{Pipelines} are queues that manage your transcoding jobs. When you create a job, you specify which pipeline you want to add the job to. Elastic Transcoder starts processing the jobs in a pipeline in the order in which you added them. If a pipeline already contains jobs when you create a new job, Elastic Transcoder queues the newest job and begins processing it as soon as resources are available for that pipeline. If the pipeline is already using all of its resources, Elastic Transcoder begins processing the next job in the pipeline when it finishes one of the jobs that it's currently processing. A pipeline can process more than one job simultaneously, and the time required to complete a job varies significantly based on the size of the file you're converting and the job specifications. Accordingly, jobs don't necessarily complete in the order in which you create them.You can temporarily stop processing jobs by pausing the pipeline.
-
-\item \textbf{Presets} are templates that contain most of the settings for transcoding media files from one format to another. Elastic Transcoder includes some default presets for common formats, for example, several iPod and iPhone versions. You can also create your own presets for formats that aren't included among the default presets. You specify which preset you want to use when you create a job.
-
-
-\begin{figure}[htbp] %  figure placement: here, top, bottom
+\item Allowing to create Custom Elements with user-defined naming schemes. These custom elements can then be distributed across the network and used by others with HTML Imports
+\item Allowing each custom element to have its own template accompanied by  styles and behavior required to use that   element
+\item Providing a suite of ready-made UI and non-UI elements to be used  and  extended  in projects
+\item The elements collection of Polymer is divided into more  sections:
+\item Core Elements — These are a set of visual and non-visual elements designed to work with the layout, user interaction, selection, and scaf- folding applications.
+\item Paper Elements — Implement the material design philosophy launched by Google recently at Google I/O 2014, and these include everything from a simple button to a dialog box with neat visual effects.
+\item Iron Elements — A set of visual and non-visual utility elements. It includes elements for working with layout, user input, selection, and scaffolding apps.
+\item Gold Elements — The gold elements are built for e-commerce use-cases like checkout flows.
+\item Neon Elements — Neon elements implement special effects.
+\item Platinum Elements — Elements to turn web pages into a true webapp, with push, offline, and  more.
+\item Molecules — Molecules are elements that wrap other javascript li- braries.
+\end{itemize}
+\begin{figure}[htb]
  \centering
- \includegraphics[width=1.0\linewidth]{images/chapter3/aws_transcoder1.png}\hfill
- \caption[Example of Preset]{Example of Preset}
+ \includegraphics[width=1.0\linewidth]{images/chapter3/polymer-architecture.png}\hfill
+ \caption[Polymer Architecture]{Polymer Architecture}
  \label{fig:fourV}
 \end{figure}
+Web components standards provide the needed primitives to build new components. It is possible to build custom elements using these primitives, but it can be a lot of work.
+The Polymer library provides a declarative syntax that makes it simpler to define custom elements. Furthermore, it adds features like templating, two-way data binding and property observation to help developers build powerful, reusable elements with less code.
 
-
-\item \textbf{Notifications} let you optionally configure Elastic Transcoder and Amazon Simple Notification Service to keep you apprised of the status of a job: when Elastic Transcoder starts processing the job, when Elastic Transcoder finishes the job, and whether Elastic Transcoder encounters warning or error conditions during processing. Notifications eliminate the need for polling to determine when a job has finished. You configure notifications when you create a pipeline.
-\end{itemize}
-
+Custom elements. If users don’t want to write their own elements, there are a number of elements built with Polymer that it is possible to drop straight into existing pages. These elements depend on the Polymer library, but they can be used without using Polymer directly, as well.\cite{tch_polymer1}
+\newline
+Polymer is one of the first implementations of a user interface library  built upon the Web Components standard. Web Components are not fully supported by browsers, but they provide a polyfill library, webcomponents.js, that provides enough functionality to support Web Components and Polymer.
+\newline
+Web Components standard is the result of the evolution of user interface libraries over the past decade, finally reaching the goal of separating HTML, CSS and JavaScript and running HTML through W3C validators. For exam- ple, looking at a .css file, it is possbile to easily determine which selectors are actually used in HTML and especially programmatically used in JavaScript. Similarly, it is easy to organize JavaScript code so that everything could be reused efficiently on multiple pages.\cite{tch_polymer2}

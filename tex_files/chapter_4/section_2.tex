@@ -1,23 +1,27 @@
-\section{Single Page Application}
-\label{sec:single_page_application}
+\section{X-Learning  Architecture}
+\label{sec:x-learning_architecture}
 
-A single-page application (SPA) is a web application or web site that fits on a single web page with the goal of providing a more fluid user experience akin to a desktop application. In a SPA, either all necessary code – HTML, JavaScript, and CSS – is retrieved with a single page load,[31] or the appropriate resources are dynamically loaded and added to the page as necessary, usually in response to user actions. The page does not reload at any point in the process, nor does control transfer to another page, although modern web technologies (such as those included in the HTML5 pushState() API) can provide the perception and navigability of separate logical pages in the application. Interaction with the single page application often involves dynamic communication with the web server behind the scenes. 
-SPAs use AJAX and HTML5 to create fluid and responsive Web apps, without constant page reloads. However, this means much of the work hap- pens on the client side, in JavaScript. For the traditional ASP.NET developer, it can be difficult to make the leap. Luckily, there are many open source JavaScript frameworks that make it easier to create SPAs. 
-In a traditional Web app, every time the app calls the server, the server renders a new HTML page. This triggers a page refresh in the browser.
+A Web application developed by using the x-project toolkit, is a full stack JavaScript  Single  Page Application.
+
+
+\subsection{Server side}
+\label{subsec:server_side}
+
+On the server side, an X-Learning app is based on NodeJS (see 2.4) used to create the server environment, MongoDB (see 2.5) used to storage data, and the Web framework Loopback by Strongloop (see 2.6).
+Node.js is a JavaScript runtime built on Chrome’s  V8  JavaScript  engne. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js’ package ecosystem, npm, is the largest ecosystem of open source libraries in the world. NodeJS lets to create a vertical full-stack application in Javascript. The NodeJS asynchronous development scheme increases performances of web applications, by using downtime caused  by  HTTP requests.
+LoopBack generates model API from the models schemas, to let CRUD operations on models. Loopback is the core of the X-Learning server-side. Document oriented API definition guarantees easiness and speed in API creation. Moreover, Loopback, is fully compatible with several DBMS thanks to connectors.
+MongoDB is a cross-platform document-oriented database.  Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas. The document-oriented being of MongoDB allows to horizontal scale in really easy way. Moreover, document models, that replace relational database’s rows, are schemaless: this feature gives to MongoDB project high levels of flexibility and manageability.
+
+\subsection{Client side}
+\label{subsec:client_side}
+
+On the client side, an X-Learning app is based on HTML5 Web Components via Polymer-Project by Google. It is a set of Polymer elements for local routing, API request, forms, lists, style and admin panels (as listed further    4.6).
+Polymer-Project is one of the most important emerging realities of the moment. Google team has heavily focused his forces on code reusability and on separation between behavior, presentation and content.  Code reusability is a direct effect of Web Components structure: the creation of widget that can be completely indipendent facilitates code reuse.
+Finally, the union between Polymer and Strongloop has been topped by the creation of the document oriented development process described below 4.5.
 
 \begin{figure}[htb] %  figure placement: here, top, bottom
  \centering
- \includegraphics[width=1.0\linewidth]{images/chapter4/no_spa.png}\hfill
- \caption[The Traditional Page Lifecycle]{The Traditional Page Lifecycle}
- \label{fig:fourV}
-\end{figure}
-
- In an SPA, after the first page loads, all interaction with the server happens through AJAX calls. These AJAX calls return data—not markup—usually in JSON format. The app uses the JSON data to update the page dynamically, without reloading the page. 
-One benefit of SPAs is obvious: Applications are more fluid and responsive, without the jarring effect of reloading and re-rendering the page. An- other benefit is provided by ending the app data as JSON creates a separation between the presentation (HTML markup) and application logic (AJAX requests plus JSON responses). With this architecture, the client and the service are independent. It is possible to replace the entire back end that runs the service, and as long as the API doesn’t change, the client won’t break. The reverse is also true.
-
-\begin{figure}[htb] %  figure placement: here, top, bottom
- \centering
- \includegraphics[width=1.0\linewidth]{images/chapter4/spa.png}\hfill
- \caption[The SPA Lifecycle]{The SPA Lifecycle}
+ \includegraphics[width=1.0\linewidth]{images/chapter4/XPR_stack.png}\hfill
+ \caption[X-learning Architectural Stack]{X-Learning Architectural Stack}
  \label{fig:fourV}
 \end{figure}
