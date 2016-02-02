@@ -1,20 +1,23 @@
 \section{WebRTC: Overview}
 \label{sec:WebRTC: Overview}
+WebRTC is a technology supported by the World Wide Web Consortium (W3C), known as real-time communication Web is an open source project sponsored by Google that allows no plug-in real-time communications via the JavaScript API. Was founded in 2011 with the aim of allowing chat, voice and video in real time, on the browser without requiring plugins, downloads or installs.
+It’s purpose is to help build a strong RTC platform that works across multiple web browsers, across multiple platforms.\cite{webrtc}
+WebRTC is a direct communication system, peer-to-peer, and safe because it uses advanced encryption systems.
+WebRTC uses a server called Web Conferencing Server in combination with a STUN server is used to provide the initial page and synchronize the connections between two endpoints WebRTC.
 
+An analysis suggests that by the end of 2016 individual users WecRTC reach 1 billion PCs, smartphones and tablets enabled with WebRTC reach almost 4 billion.
 
-http://www.toptal.com/webrtc/taming-webrtc-with-peerjs
-
-http://www.html5rocks.com/en/tutorials/webrtc/basics/
-
-
-%%%%
-X-Learning in addition to video streaming are given the opportunity to the teacher to schedule webinars.
-The webinar is a live event, allowing more people to connect live to participate in an interactive lesson, a training course, a workshop or conference. Just like in real classroom we find ourselves at the scheduled time and everyone has the opportunity to attend and speak at the event to ask questions and share ideas.
-To achieve this feature has been adopted WebRTC useful in all contexts of video conference.
-%%%%
-
-WebRTC born with the intention to offer Web Developers One Tool to manage the interchange of data stream between two devices direct connection ( peer-to -Peer ).
-WebRTC (Web Real-Time Communication) is an API definition drafted by the World Wide Web Consortium (W3C) that supports browser-to-browser applications for voice calling, video chat, and P2P file sharing without the need of either internal or external plugins.[ How WebRTC Is Revolutionizing Telephony. Blogs.trilogy-lte.com (2014-02-21). Retrieved on 2014-04-11.]
-
-Since it was first introduced by Google in May 2011, WebRTC has been used in many modern web applications. Being a core feature of many modern web browsers, web applications can seamlessly take advantage of this technology to deliver improved user experience in many ways. Video streaming or conferencing applications that don’t require bloated browser plugins, and can take advantage of peer-to-peer (P2P) networks (while not transmitting every bit of data through some server) is only a part of all the amazing things that can be achieved with WebRTC[http://www.toptal.com/webrtc/taming-webrtc-with-peerjs]
-WebRTC is used in various apps like WhatsApp, Facebook Messenger, appear.in and platforms such as TokBox[http://www.html5rocks.com/en/tutorials/webrtc/basics/]
+In order to establish a P2P communication it is necessary that the peers are able to identify the one with the other.
+To allow peers to know your public IP address and then to be able to establish a P2P connection, WebRTC uses the framework Interactive Connectivity Establishment (ICE).\cite{webrtc2}
+ICE uses a server that implements the protocol Session Traversal
+Utilities for NAT (STUN). STUN is a protocol that serves as a tool for other
+protocols in addressing the issue of NAT traversal. Can be used
+from an endpoint to determine the IP address and port assigned to
+NAT. STUN works with many existing NATs, and does not require
+their particular behaviors.\cite{webrtc1}
+The STUN server is used only during the stage of establishment of the connection
+and once the connection is established between the data flow
+peers directly. There are many servers available that implement
+the STUN protocol. Google, for example, it provides some who
+They can be freely used in the implementation of services of connection
+P2P.

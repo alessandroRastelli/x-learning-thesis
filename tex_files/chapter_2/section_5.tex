@@ -1,14 +1,19 @@
 \section{Amazon SNS and SQS}
 \label{sec:Amazon SNS and SQS}
 
-  http://docs.aws.amazon.com/sns/latest/dg/welcome.html
-Amazon Simple Notification Service (Amazon SNS) is a web service that coordinates and manages the delivery or sending of messages to subscribing endpoints or clients. In Amazon SNS, there are two types of clients—publishers and subscribers—also referred to as producers and consumers. Publishers communicate asynchronously with subscribers by producing and sending a message to a topic, which is a logical access point and communication channel. Subscribers (i.e., web servers, email addresses, Amazon SQS queues, AWS Lambda functions) consume or receive the message or notification over one of the supported protocols (i.e., Amazon SQS, HTTP/S, email, SMS, Lambda) when they are subscribed to the topic.
-{\color{red} In X-Learning platform the Amazon SNS service is use together the Amazon SQS.}
- Amazon SQS is a distributed queue system that enables web service applications to quickly and reliably queue messages that one component in the application generates to be consumed by another component. A queue is a temporary repository for messages that are awaiting processing.
-Using Amazon SQS, you can decouple the components of an application so they run independently, with Amazon SQS easing message management between components. Any component of a distributed application can store messages in a fail-safe queue. Messages can contain up to 256 KB of text in any format. Any component can later retrieve the messages programmatically using the Amazon SQS API.
 
-Amazon SQS ensures delivery of each message at least once, and supports multiple readers and writers interacting with the same queue. A single queue can be used simultaneously by many distributed application components, with no need for those components to coordinate with each other to share the queue.
-One of the resulting tradeoffs is that SQS does not guarantee first in, first out delivery of messages.
+Amazon Simple Notification Service (Amazon SNS) is a distributed publish-subscribe system that has the task of managing the sending and receiving of messages.
+Publishers communicate asynchronously with subscribers by producing and sending a message to a topic, which is a logical access point and communication channel. Subscribers (i.e., web servers, email addresses, Amazon SQS queues, AWS Lambda functions) consume or receive the message or notification over one of the supported protocols (i.e., Amazon SQS, HTTP/S, email, SMS, Lambda) when they are subscribed to the topic.\cite{aws_sns}
 
 
-{\color{red} For X-learning platform the order is not important. Indeed when Elastic Transcoder job completed a message was product and send and a this time the subscriber SQS receive the notification and insert message into queue. X-learning server-side read and processed each SQS message to publish the course.}
+{\color{red}You don't have to couple SNS and SQS always but in my platform  are being used both.}
+By coupling SNS with SQS, you can receive messages at your pace. It allows clients to be offline, tolerant to network and host failures. You also achieve guaranteed delivery.
+
+Amazon SQS is a distributed queue system that enables web service applications to quickly and reliably queue messages that one component in the application generates to be consumed by another component. A queue is a temporary repository for messages that are awaiting processing.
+
+Messages can contain up to 256 KB of text in any format. Any component can later retrieve the messages programmatically using the Amazon SQS API.
+
+Amazon SQS supports multiple readers and writers interacting with the same queue and a single queue can be used simultaneously by many distributed application components
+
+
+{\color{red} In my platform the order is not important. Indeed when Elastic Transcoder job completed a message was product and send and a this time the subscriber SQS receive the notification and insert message into queue. X-learning server-side read and processed each SQS message to publish the course.}

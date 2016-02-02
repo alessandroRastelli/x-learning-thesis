@@ -1,16 +1,25 @@
 \section{Amazon S3}
 \label{sec:Amazon S3}
 
-Amazon S3 (Simple Storage Service) is an online file storage web service offered by Amazon Web Services. Amazon S3 provides storage through web services interfaces (REST, SOAP, and BitTorrent).Amazon launched S3, its first publicly available web service, in the United States in March 2006 and in Europe in November 2007 [25].
-Amazon S3 is reported to store more than 2 trillion objects as of April 2013.[10] S3 uses include web hosting, image hosting, and storage for backup systems.  Amazon S3 provides an API (Application programming interface) for third-party developers. It describes various API operations, related request and response structures, and error codes.[38] Web services interface can be used to store and retrieve any amount of data, at any time, from any- where on the web. It gives any developer access to the same highly scalable, reliable, secure, fast, inexpensive infrastructure that Amazon uses to run its own global network of web sites. The service aims to maximize benefits of scale and to pass those benefits on to developers. Today, there are different kinds of file managers for Amazon S3. An effective solution for Amazon provides a user interface to Amazon S3 accounts, files and buckets, allowing to browse, create and delete files and buckets.
+Amazon S3 (Simple Storage Service) is an online file storage web service offered by Amazon Web Services. Amazon S3 offers to developers and IT teams a safe, durable and highly scalable storage solution.
+%%%%
+Amazon S3 provides a advantage cost for storage of objects for a wide variety of use cases, such as cloud applications, content distribution, backup and archiving, disaster recovery and analysis of Big Data.
+%%%
+
+Amazon S3 offers different classes of storage designed for different use cases, including Amazon S3 Standard for generic dtaa storage with frequent access, Amazon S3 Standard - Infrequent Access (Standard - IA) for data storage with less frequency access and Amazon Glacier to long-term storage.
+Amazon S3 is reported to store more than 2 trillion objects as of April 2013.\cite{s3_stats} S3 uses include web hosting, image hosting, and storage for backup systems. 
+Amazon S3 provides an API (Application programming interface) for third-party developers.
+
+Today, there are different kinds of file managers for Amazon S3. An effective solution for Amazon provides a user interface to Amazon S3 accounts, files and buckets, allowing to browse, create and delete files and buckets.
 
 \subsection{Amazon S3 Multipart Upload}
 \label{subsec:amazon_S3_multipart_upload_initiation}
 
 
-In X-Learning platform the upload video use the Multipart upload API enables it to upload large objects quickly through the parallel upload of the n    parts of the object .
+In my platform the upload video use the Multipart upload API enables it to upload large objects quickly through the parallel upload of the n parts of the object .
+
 Multipart uploading is a three-step process: You initiate the upload, you upload the object parts, and after you have uploaded all the parts, you complete the multipart upload. Upon receiving the complete multipart upload request, Amazon S3 constructs the object from the uploaded parts, and you can then access the object just as you would any other object in your bucket.
-You can list of all your in-progress multipart uploads or get a list of the parts that you have uploaded for a specific multipart upload. Each of these operations is explained in this section.
+You can list of all your in-progress multipart uploads or get a list of the parts that you have uploaded for a specific multipart upload.\cite{s3_multipart}
 
 
 \begin{figure}[htb] %  figure placement: here, top, bottom
