@@ -1,7 +1,7 @@
 \section{Video Upload}
 \label{sec:video_upload}
 In questo paragrafo verà illustrata nel dettaglio la fase di upload dei contenuti multimediali.
-La piattaforma nella parte admin permette la selezione e l'upload dei contenuti,tali operazioni sono pero incapsulate in un unico tag che innesca i processi che vedremo tra breve. 
+La parte admin della piattaforma permette la selezione e l'upload dei contenuti, tali operazioni sono pero incapsulate in un unico tag che innesca i processi che vedremo tra breve. 
 
 \begin{lstlisting}[language=html]
    <form class="form">
@@ -37,6 +37,7 @@ E’ possibile notare come il processo di upload si divide in 3 parti:
       last-response="{{response_get}}" on-response="on_response_get">
     </iron-ajax>
 \end{lstlisting}
+
 tramite tale API viene chiamato lato server la funzione seguente che permette di stabilire la connessione con AWS e ritorna il UploadId che verrà utilizzato nei passaggi successivi per iniziare un multipart upload.
 
 \begin{lstlisting}[language=javascript]
@@ -74,7 +75,7 @@ Ottenuta la risposta da AWS, sempre lato client il contenuto multimediale selezi
 Il multiPart Upload può essere realizzato solo con file di dimensioni superiori a 5MB e per questo che la creazione di questi chunks viene affidata a una funzione che:
 \begin{itemize}
       \item Controlla la dimensioni del file
-      \item calcolo il numero di chunk in base alle dimensioni scelte per ogni chunk
+      \item calcolo il numero di chunk in maniera parametrica sulla base delle dimensioni scelte per ogni chunk
       \item splitta il file in chunk, che come vedremo a breve verrano poi caricati su S3.
     \end{itemize}
 

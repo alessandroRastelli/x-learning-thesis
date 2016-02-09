@@ -61,7 +61,8 @@ Transcoder.createJob = function (file_name,path,callback){
   });
 \end{lstlisting}
 
-Nel seguente codice è possibile vedere come il server nella richiesta specifica un PiepelineId ovvero un ID corrispondente a una determinata Pipeline dove il job in questione verra inserito.Un altro dato necessario richiesto dalle API è il PresetId che invece rappresenta ID del Preset che come già accennato nel capitolo 2 rappresenta are templates that contain most of the settings for transcoding media files from one format to another.
+Nel seguente codice è possibile vedere come il server nella richiesta specifica un PiepelineId ovvero un ID corrispondente a una determinata Pipeline dove il job in questione verra inserito.
+Un altro dato necessario richiesto dalle API è il PresetId che invece rappresenta ID del Preset che come già accennato nel capitolo 2 rappresenta are templates that contain most of the settings for transcoding media files from one format to another.
 L’immagine seguente mostra la pipeline utilizzata durante la fase di test della piattaforma di X-learning.
 
 
@@ -72,11 +73,12 @@ L’immagine seguente mostra la pipeline utilizzata durante la fase di test dell
 \end{minipage}
 
 
-E' possibile notare inoltre, come nella pipeline viene specificato anche “arn:aws:sns:us-west-2:090870039614:x-learning” che rappresenta il Simple Notification Service topic.
-Tale servizio descritto nel capitolo 2 è stato utilizzato nella mia piattaforma per ricevere le notiche a termine della transcodifica in modo da poter:
+E' possibile notare inoltre, come nella pipeline viene specificato anche “arn:aws:sns:us-west-2:090870039614:x-learning” che rappresenta il serivizio Amazon Simple Notification Service is a distributed publish-subscribe system.
+Tale servizio descritto nel capitolo 2 viene utilizzato insieme al servizio SQS, una queue con gli esisti della transcodifica.
+Tali risultati all'interno della SQS vengono ricevuti come notifica nella piattaforma che server side li analizza in modo da poter:
 
 \begin{itemize}
-\item rendere il corso disponibile per la pubblicazione
+\item rendere il corso disponibile per la pubblicazione e quindi fruibile ai Members
 \item liberare spazio sul bucket S3 eliminando il video nel formato originale
 
 \begin{lstlisting}[language=javascript]

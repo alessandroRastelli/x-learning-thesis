@@ -10,12 +10,11 @@ To achieve this feature has been adopted WebRTC useful in all contexts of video 
 
 %For the creation of server side webinar it was used PeerJs that allows the establishment and management of video conferences in a more simple and cleaner than WebRTC.
 
- Client side instead was create two distinct a web component for the teacher and one for the student wishing to connect to the webinar.
+Client side instead was create two distinct a web component for the teacher and one for the student wishing to connect to the webinar.
 
 \subsubsection{Webinar: server side}
 To support the implementation of X-Learning I used JavaScript library PeerJS.
-PeerJS uses implementing WebRTC
-Browser API to provide comprehensive, configurable and easy to use that allow the creation of the peer-to-peer. With nothing more than an ID, a peer can create a P2P connection with a remote peer.Then every peer is Identified using nothing more than an ID. A string That the peer itself can choose, or have a server generated one.
+PeerJS uses implementing WebRTC Browser API to provide comprehensive, configurable and easy to use that allow the creation of the peer-to-peer. With nothing more than an ID, a peer can create a P2P connection with a remote peer.Then every peer is Identified using nothing more than an ID. A string That the peer itself can choose, or have a server generated one.
 PeerJS includes within it a module called PeerServer which it can be installed on its own server and is used to provide peer id which they will use to establish the P2P connection. The official repository on GitHub even has a one-click button to deploy an instance of PeerJS Server to Heroku.
 In my case, i just want to create an instance of ExpressPeerServer in my Node.js application, and serve it at “/peerjs”
 
@@ -55,7 +54,7 @@ Client side there is a distinction between teacher and student. Specifically, I 
 The use of such component performs the following operations:
 \begin{itemize}
 \item requires an id to the server listens
-\item persists id webinar MongoDb
+\item persists id webinar into model Webinar throght loopback(Mongodb)
 \item sets up the call
 \item waits
 \end{itemize}

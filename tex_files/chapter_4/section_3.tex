@@ -1,9 +1,8 @@
 \section{X-Learning design}
 \label{sec:x-learning_design}
 
-  Durante la fase iniziale di analisi e progettazione si è evidenziata la necessità di suddividere il lavoro in due macro-blocchi public e admin. L’idea base è stata quella di delegare tutti compiti di creazione, gestione al lato admin e delegare invece la gestione della fruizione dei contenuti al lato client.
+Durante la fase iniziale di analisi e progettazione si è evidenziata la necessità di suddividere il lavoro in due macro-blocchi public e admin. L’idea base è stata quella di delegare tutti compiti di creazione, gestione al lato admin e delegare invece la gestione della fruizione dei contenuti al lato client.
 Inoltre questa scelta è dettata dalla volontà di rendere indipendenti tra di loro i vari componenti per permettere una maggiore flessibilità e garantire anche maggiore sicurezza posizionando per esempio il client in un server diverso da quello admin.
-Il risultato finale ottenuto è quello di due piattaforme totalmente indipendenti che possono coesistere tra loro, permettendo massima autonomia e garantendo un elevato indice di coesione.
 
 
 The process to build a web application based on x-learning toolkit consists of the following four steps: models schemas definition, HTTP RESTful API definition, UI components definition and UI components  assembly.
@@ -16,9 +15,32 @@ The process to build a web application based on x-learning toolkit consists of t
 A description of entities, properties, relations and data access policies are defined as JSON  documents.
 As to a learning platform, the essential entities to be modelled are the following: Course, Lecture, Video and Teacher(Member).
 
+
+\subsubsection{ Model - Manager}
+
+The model Manager represents the Aministrator of platform and course creator. Its features are: role, fullname, location and is_main_Admin can be true o false if he is the amministrator or invitable author. The Manager has relations teaching with courses.
+
+\begin{lstlisting}[language=json]
+{
+  "name": "Manager",
+  "plural": "managers",
+  "base": "InvitableUser",
+  "properties": {
+    "role": { "type": "string", "enum": [ "admin", "editor", "author"]
+    },
+    "fullname": { "type": "string" },
+    "location": { "type": "string" },
+    "is_main_admin": { "type": "Boolean", "required": false }
+  },
+  "relations": {
+    "teaching": { "type": "hasMany", "model": "Course", "foreignKey": "teacher_id" }
+}
+\end{lstlisting}
+
+
 \subsubsection{ Model - Member}
 
-The model Member represents the course creator but also the students of other course. Its features are: name, lastname, email.gender,photo,phone number,location and date. The Member has relations with course, and for each of these relation can be learning or teaching.
+The model Member represents students of other course. Its features are: name, lastname, email.gender,photo,phone number,location and date. The Member has relations learning with course.
 
 \begin{lstlisting}[language=json]
 {
@@ -229,8 +251,7 @@ Di seguito sono riportate alcuni metodi remoti che sono stati creati e un esempi
 \begin{lstlisting}[language=javascript]
 
 module.exports = function (Video) {
-  ...
-Video.delete_video = function(path,callback) {
+  Video.delete_video = function(path,callback) {
     var self = this;
     var params = {
       Bucket: S3_BUCKET,
@@ -272,7 +293,6 @@ Video.delete_video = function(path,callback) {
     ],
     returns: {arg: 'delete_response', type: 'string'}
   });
-  ....
 };
 \end{lstlisting}
 
@@ -284,7 +304,7 @@ The goal of this subsection is to highlight as distinct UI components can be def
 
 \subsubsection {Admin side}
 \label{subsec:Admin_side}
-The admin side is the part of the platform that enables the teacher to manage the courses and all its sub-components such as lectures, webinars, educational material.
+The admin side is the part of the platform that enables the Manager to manage the courses and all its sub-components such as lectures, webinars, educational material.
 The main pages that compose the admin side are:
 
 \begin{itemize}
