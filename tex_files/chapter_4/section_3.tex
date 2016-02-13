@@ -1,8 +1,17 @@
 \section{X-Learning design}
 \label{sec:x-learning_design}
 
-Durante la fase iniziale di analisi e progettazione si è evidenziata la necessità di suddividere il lavoro in due macro-blocchi public e admin. L’idea base è stata quella di delegare tutti compiti di creazione, gestione al lato admin e delegare invece la gestione della fruizione dei contenuti al lato client.
-Inoltre questa scelta è dettata dalla volontà di rendere indipendenti tra di loro i vari componenti per permettere una maggiore flessibilità e garantire anche maggiore sicurezza posizionando per esempio il client in un server diverso da quello admin.
+%%%
+Durante la fase iniziale di analisi e progettazione si è evidenziata la necessità di realizzare due micro-piattaforme public e admin. 
+\begin{itemize}
+\item La piattaforma Admin side permette all'amministratore di gestire l'organico dei professori e la creazione e gestione dei corsi e dei suoi contenuti.
+\item Alla piattaforma Client side è stata invece delegata la fruizione dei contenuti.
+\end{itemize}
+Inoltre questa scelta è dettata dalla volontà di rendere indipendenti la piattaforma admin da quella client per garantire maggiore flessibilità e garantire anche maggiore sicurezza posizionando per esempio il client in un server diverso da quello admin.
+
+
+% L’idea base è stata quella di delegare tutti compiti di creazione, gestione al lato admin e delegare invece la gestione della fruizione dei contenuti al lato client.
+% Inoltre questa scelta è dettata dalla volontà di rendere indipendenti tra di loro i vari componenti per permettere una maggiore flessibilità e garantire anche maggiore sicurezza posizionando per esempio il client in un server diverso da quello admin.
 
 
 The process to build a web application based on x-learning toolkit consists of the following four steps: models schemas definition, HTTP RESTful API definition, UI components definition and UI components  assembly.
