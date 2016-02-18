@@ -6,14 +6,15 @@ Amazon Simple Notification Service (Amazon SNS) is a distributed publish-subscri
 Publishers communicate asynchronously with subscribers by producing and sending a message to a topic, which is a logical access point and communication channel. Subscribers (i.e., web servers, email addresses, Amazon SQS queues, AWS Lambda functions) consume or receive the message or notification over one of the supported protocols (i.e., Amazon SQS, HTTP/S, email, SMS, Lambda) when they are subscribed to the topic.\cite{aws_sns}
 
 
-{\color{red}You don't have to couple SNS and SQS always but in my platform  are being used both.}
-By coupling SNS with SQS, you can receive messages at your pace. It allows clients to be offline, tolerant to network and host failures. You also achieve guaranteed delivery.
+You don't always have to unite SNS and SQS, but in my platform both are being used.
+
+By uniting SNS with SQS, you can receive messages at your own pace. It allows clients to be offline, tolerant to network and host failures. You also achieve guaranteed delivery.
 
 Amazon SQS is a distributed queue system that enables web service applications to quickly and reliably queue messages that one component in the application generates to be consumed by another component. A queue is a temporary repository for messages that are awaiting processing.
 
 Messages can contain up to 256 KB of text in any format. Any component can later retrieve the messages programmatically using the Amazon SQS API.
 
-Amazon SQS supports multiple readers and writers interacting with the same queue and a single queue can be used simultaneously by many distributed application components
+Amazon SQS supports multiple readers and writers interacting with the same queue and a single queue can be used simultaneously by many distributed application components.
 
-
-{\color{red} In my platform the order is not important. Indeed when Elastic Transcoder job completed a message was product and send and a this time the subscriber SQS receive the notification and insert message into queue. X-learning server-side read and processed each SQS message to publish the course.}
+In my platform the order is not important. In fact, when Elastic Transcoder job is completed a message was produced and sent.
+At this time the subscriber SQS receives the notification and inserts a message in the queue. X-learning server-side read and processed each SQS message in order to publish the course.

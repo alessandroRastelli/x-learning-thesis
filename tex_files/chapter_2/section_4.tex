@@ -1,9 +1,9 @@
 \section{Amazon Elastic Transcoder}
 \label{sec:Amazon Elastic Transcoder}
 
-Amazon Elastic Transcoder is a service of Amazon Web Services that allows video conversion directly in the cloud(S3), of course is not a service suited to converting home movies, we can do with any software installed directly on your PC. 
-This service allows you to develop a web application or enterprise able to convert an input video in different formats as input file
-So Amazon Elastic Transcoderis a paid service offered by Amazon AWS works directly with media files that you have stored in Amazon Simple Storage Service (Amazon S3) and convert these into formats that users can play back on mobile devices, tablets, web browsers, and connected televisions.
+Amazon Elastic Transcoder is a service of Amazon Web Services that allows video conversion directly in the cloud(S3), of course it is not a service suited to converting home movies, that can be done with any software installed directly on your PC. 
+This service allows you to develop a web application or enterprise able to convert an input video in different formats from the input file.
+So Amazon Elastic Transcoder is a paid service offered by Amazon AWS and it works directly with media files that you have stored in Amazon Simple Storage Service (Amazon S3). It converts these into formats that users can play back on mobile devices, tablets, web browsers, and connected televisions.
 
 \begin{figure}[htb] %  figure placement: here, top, bottom
  \centering
@@ -18,7 +18,7 @@ Elastic Transcoder has four components:
 
 %do the work of transcoding. Each job converts one file into up to 30 formats. For example, if you want to convert a media file %into six different formats, you can create files in all six formats by creating a single job. When you create a job, you specify %the name of the file that you want to transcode, the names that you want Elastic Transcoder to give to the transcoded files, and %several other settings. For each format that you want to transcode into, you also specify a template, known as a preset (see %below), that contains the audio and video settings that you want to use for the transcoded file or files
 
-\item \textbf{Jobs}The job is responsible for the work of transcoding of a file into up to 30 formats. Each job takes as input the name of the file (must be present inside the bucket of s3) and a Preset (see below), which contains the format and the audio and video settings for the output file
+\item \textbf{Jobs}The job is responsible for the work of transcoding a file into up to 30 formats. Each job takes an input of the name of the file (must be present inside the bucket of s3) and a Preset (see below), which contains the format and the audio and video settings for the output file.
 
 
 \item \textbf{Pipelines} are queues that manage your transcoding jobs. When you create a job, you specify which pipeline you want to add the job to. Elastic Transcoder starts processing the jobs in a pipeline in the order in which you added them. If a pipeline already contains jobs when you create a new job, Elastic Transcoder queues the newest job and begins processing it as soon as resources are available for that pipeline. If the pipeline is already using all of its resources, Elastic Transcoder begins processing the next job in the pipeline when it finishes one of the jobs that it's currently processing. A pipeline can process more than one job simultaneously, and the time required to complete a job varies significantly based on the size of the file you're converting and the job specifications. Accordingly, jobs don't necessarily complete in the order in which you create them.You can temporarily stop processing jobs by pausing the pipeline.\cite{s3_et}
