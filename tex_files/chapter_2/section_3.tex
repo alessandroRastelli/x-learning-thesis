@@ -16,7 +16,7 @@ Amazon provides an effective user interface that allows its users to browse, cre
 \label{subsec:amazon_S3_multipart_upload_initiation}
 
 
-In my platform to upload videos I use the Multipart upload API that enables to upload large objects quickly through the parallel upload of the n parts of the object.
+In the platform to upload videos Multipart upload API is used which enables to upload large objects quickly through the parallel upload of the n parts of the object.
 
 Multipart uploading is a three-step process: initiate the upload, upload the object parts, and after all the parts have been uploaded, complete the multipart upload. Upon receiving the complete multipart upload request, Amazon S3 constructs the object from the uploaded parts, and you can then access the object just as you would any other object in your bucket.
 You can access a list of all your in-progress multipart uploads or get a list of the parts that you have uploaded for a specific multipart upload.\cite{s3_multipart}
