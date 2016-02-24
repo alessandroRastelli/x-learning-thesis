@@ -1,7 +1,8 @@
 \section{Video Upload}
 \label{sec:video_upload}
-In questo paragrafo verà illustrata nel dettaglio la fase di upload dei contenuti multimediali.
-La parte admin della piattaforma permette la selezione e l'upload dei contenuti, tali operazioni sono pero incapsulate in un unico tag che innesca i processi che vedremo tra breve. 
+
+This paragraph will illustrate in detail the upload phase of the multimedial contents.
+The admin part of the platform allows the selection and the upload of the contents. These operations, however, are contained in a single tag that start the processes shown below.
 
 \begin{lstlisting}[language=html]
    <form class="form">
@@ -11,8 +12,7 @@ La parte admin della piattaforma permette la selezione e l'upload dei contenuti,
     </form>
 \end{lstlisting}
 
-L'intero processo che parte con la selezione e termina con lo storage dei contenuti su AWS S3 può essere sintetizzato e chiarito con l’immagine seguente:
-
+The entire process thats starts with the selection and ends with the content storage on AWS S3 can be synthesized and clarified with the following image:
 
 \begin{figure}[htb]
  \centering
@@ -21,15 +21,15 @@ L'intero processo che parte con la selezione e termina con lo storage dei conten
  \label{fig:fourV}
 \end{figure}
 
-
-E’ possibile notare come il processo di upload si divide in 3 parti: 
+It can be observed how the upload process is divided in 3 parts:
 
 \begin{enumerate}
 \item \textbf{Request}
-   Nella prima fase viene instaurata la comunicazione con Amazon AWS, quindi il client esegue una GET al server, passando:
+In the first phase, the communication with Amazon AWS is established, so the client performs a GET operation to the server, passing to it the following information:
+
    \begin{itemize}
-      \item \textbf{params} contente il file name e file type
-      \item \textbf{url} ovvero le API che devo chiamare che nel caso specifico è GET /videos/create\_multiPart\_upload
+      \item \textbf{params} contains the file name and type
+      \item \textbf{url} the API that must be called in this specific case is GET /videos/create\_multiPart\_upload
     \end{itemize}
 
   \begin{lstlisting}[language=html]
@@ -38,7 +38,8 @@ E’ possibile notare come il processo di upload si divide in 3 parti:
     </iron-ajax>
 \end{lstlisting}
 
-tramite tale API viene chiamato lato server la funzione seguente che permette di stabilire la connessione con AWS e ritorna il UploadId che verrà utilizzato nei passaggi successivi per iniziare un multipart upload.
+The server side through this API calls the following function which allows to establish the connection with AWS and returns the UploadId.
+This will be used in the following passages to start a multipart upload.
 
 \begin{lstlisting}[language=javascript]
 
@@ -71,13 +72,15 @@ Video.create_multiPart_upload = function (file_name,file_type,callback){
   });
 
 \end{lstlisting}
-Ottenuta la risposta da AWS, sempre lato client il contenuto multimediale selezionato per il caricamento viene suddiviso in chunks.
-Il multiPart Upload può essere realizzato solo con file di dimensioni superiori a 5MB e per questo che la creazione di questi chunks viene affidata a una funzione che:
+
+Once the AWS response is obtained, client side selected multimedial content is divided into chunks.
+The multipart upload can be achieved only with files of dimensions superior to 5MB and because of this, the creation of these chunks relies on a function that:
+
 \begin{itemize}
-      \item Controlla la dimensioni del file
-      \item calcolo il numero di chunk in maniera parametrica sulla base delle dimensioni scelte per ogni chunk
-      \item splitta il file in chunk, che come vedremo a breve verrano poi caricati su S3.
-    \end{itemize}
+  \item Check the file dimension
+  \item Calculate the number of chunks in a parametric manner based on the dimensions chosen for every chunk
+  \item Splits the file in chunks, which will be uploaded on S3 as seen below. 
+\end{itemize}
 
 
 \begin{figure}[htb]
@@ -87,17 +90,15 @@ Il multiPart Upload può essere realizzato solo con file di dimensioni superiori
  \label{fig:fourV}
 \end{figure}
 
-
-Arrivati a questo punto iterativamente su ogni chunk viene richiesto un SignedUrl(fase 2) e poi l'upload(fae 3) su S3 come illustrato nella figura precedente:
-
+At this point a SignedUrl (phase 2) is requested and uploaded on S3 (phase 3) iteratively for every chunk as seen in the previous figure.
 
 \item \textbf{Signed URL}
-  A questo punto viene di nuovo inviata una richiesta al server tramite l'API GET /videos/signed\_upload\_part.
-  Tramite tale API viene chimata la funzione del server che ha il compito di chiedere ad AWS un Signed Url, e prende in input:
+  A request is now sent once again to the server through the API GET /videos/signed\_upload\_part.
+  Through this API the server function is called, which has the task to ask a Signed Url to AWS, and takes in an input:
   \begin{itemize}
-      \item Key ovvero il file name
-      \item PartNumber ovvero il i-esimo chunk che sta per essere caricato
-      \item UploadId ottenuto nella fase di Request
+      \item Key is the file name
+      \item PartNumber is the i-th chunk that is about to be uploaded
+      \item UploadId obtained in the Request phase
 
   \end{itemize}
 
@@ -132,8 +133,8 @@ Arrivati a questo punto iterativamente su ogni chunk viene richiesto un SignedUr
 \end{lstlisting}
 
 \item \textbf{Upload}
+In the third and last phase the Signed Url of AWS is awaited, which will contain the ETAG that represents the id of the i-th chunk.
 
-Nella terza e ultima fase si attende la risposta di AWS e quindi la Signed Url, che al suo interno conterrà l’ETAG, che rappresenta l’id dell’i-esimo chunk.
 \begin{lstlisting}[language=html]
 var ajax = document.createElement('iron-ajax');
         ajax.url = url;
@@ -149,13 +150,13 @@ var ajax = document.createElement('iron-ajax');
         });
 \end{lstlisting}
 
-come è possibile notare nello snippet sopra viene eseguita una PUT  contente le informazioni come ETAG e il chunk all’interno del body.
-I punti 2 e 3 appena descritti vengono iterati per ogni chunk,e solo al termine di tutti gli upload viene comunicato a S3 il termine dell'operazione.
-Quindi lato client viene viene chiamata l'API PUT /videos/complete\_upload\_part che prende in input i seguenti parametri:
+As seen in the above snippet, a PUT operation is executed which contains information in the body such as ETAG and the chunk.
+Points 2 and 3 described above are executed for every chunk. At the end, the conclusion of the operation is communicated to S3. 
+So, client side is called API PUT /videos/complete\_upload\_part which takes the following parameters in input:
   \begin{itemize}
-      \item Key ovvero il file name
-      \item UploadId ottenuto nella fase di Request
-      \item Parts un array contente tutti gli id dei chunk
+      \item Key is file name
+      \item UploadId obtained in Request phase
+      \item Parts is an array which contains every chunk id
 
   \end{itemize}
 
@@ -193,4 +194,4 @@ Video.complete_upload_part = function(Key, UploadId,Parts,callback) {
 \end{lstlisting}
 
 \end{enumerate}
-Solo al termine di tale operazione l'upload può considerarsi terminato e sarà AWS poi a ricostruire il file mettendo insieme tutti chunk ricevuti e specificati nel campo Parts della funzione precedente.
+The upload can be considered terminated only at the end of this operation. AWS will then reconstruct the file by uniting all the chunks received and specified in the Parts section of the previous function.

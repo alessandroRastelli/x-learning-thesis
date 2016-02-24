@@ -1,20 +1,17 @@
 \section{Video management overview}
 \label{sec:Video_management_overview}
 
-X-Learning is an e-learning platform created by a Manager that allows users to follow his courses and webinars.
-Each course is characterized by a category of interest, description, cost, educational materials and a set of lessons.
-
-%%%%
-The manager o un qualsiasi altro utente autorizzato da quest'ultimo can be create courses, webinars add educationl materials.
-%%%%
+The use case of the thesis project, X-Learning, represents a platform in which the administrator or whichever authorized collaborator can manage the insert, the modifications and eliminations of the various courses.
+Each course is characterized by a title, description, cost, teaching material, lessons and webinar.
 
 \subsection{Course management}
 \label{sec:course_management}
 
-The creation of the course is articulated in two main phases:
+The course creation is articulated in two main phases:
 
 \begin{itemize}
-\item The first phase included information such as title, description, language, cost, category, objectives and requirements needed to understand the content. Created course the first phase may be considered completed. Subsequently the teacher will begin the second phase, which consists of adding video lecture and educational content.
+\item The first phase includes information such as title, description, language, cost, category, objectives and requirements needed to understand the content. Once the course is created, the first phase can be considered completed.
+Subsequently the teacher will begin the second phase, which consists of adding video lectures and educational content.
 
 \begin{figure}[htb]
  \centering
@@ -35,14 +32,14 @@ The page displayed in the picture allows the teacher to select the video that wi
 
 \end{itemize}
 
-In order to allow upload the video on client side I has been created a web component follows:
+In order to allow the upload of the video on client side the following web component has been created:
 
 \begin{lstlisting}[language=html]
       <input-s3-video></input-s3-video>
 \end{lstlisting}
 
-The following tag is responsible for the overall management of uploading and transcoding of video and allows you to enter any work on the project Uploading Videos hiding the full complexity that will be clarified in the following paragraphs.
-Also for streaming it has created a web component that allows the video vision, hiding all  encountered problems on the thesis work and complexity that shown in chapter 3.
+The following tag is responsible for the overall management of video uploading and transcoding. Furthurmore this component allows you to enter the video upload on any part of the project, hiding the full complexity that will be clarified in the following paragraphs.
+A web component has also been created for streaming which allows video vision, hiding all encountered problems during the thesis and complexity that is shown in chapter 3.
 
 \begin{lstlisting}[language=html]
        <deck-video src="{{data.lecture.video.url}}"></deck-video>
