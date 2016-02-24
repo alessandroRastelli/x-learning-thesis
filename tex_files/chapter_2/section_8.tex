@@ -5,19 +5,10 @@ It’s purpose is to help build a strong RTC platform that works across multiple
 WebRTC is a direct communication system, peer-to-peer, and safe because it uses advanced encryption systems.
 WebRTC uses a server called Web Conferencing Server in combination with a STUN server is used to provide the initial page and synchronize the connections between two endpoints WebRTC.
 
-An analysis suggests that by the end of 2016 individual users WecRTC reach 1 billion PCs, smartphones and tablets enabled with WebRTC reach almost 4 billion.
+An analysis suggests that by the end of 2016 individual WebRTC users will reach 1 billion PCs, smartphones and tablets enabled with WebRTC will reach almost 4 billion.
 
-In order to establish a P2P communication it is necessary that the peers are able to identify the one with the other.
+In order to establish a P2P communication it is necessary that the peers are able to identify with one another.
 To allow peers to know your public IP address and then to be able to establish a P2P connection, WebRTC uses the framework Interactive Connectivity Establishment (ICE).\cite{webrtc2}
-ICE uses a server that implements the protocol Session Traversal
-Utilities for NAT (STUN). STUN is a protocol that serves as a tool for other
-protocols in addressing the issue of NAT traversal. Can be used
-from an endpoint to determine the IP address and port assigned to
-NAT. STUN works with many existing NATs, and does not require
-their particular behaviors.\cite{webrtc1}
-The STUN server is used only during the stage of establishment of the connection
-and once the connection is established between the data flow
-peers directly. There are many servers available that implement
-the STUN protocol. Google, for example, it provides some who
-They can be freely used in the implementation of services of connection
-P2P.
+ICE uses a server that implements the protocol Session Traversal Utilities for NAT (STUN). STUN is a protocol that serves as a tool for other protocols in addressing the issue of NAT traversal. Can be used from an endpoint to determine the IP address and port assigned to NAT. STUN works with many existing NATs, and does not require their particular behaviors.\cite{webrtc1}
+The STUN server is used only during the stage of establishment of the connection and once the connection is established between the data flow peers directly. There are many servers available that implement the STUN protocol. Google, for example, it provides some who.
+They can be freely used in the implementation of services of connection P2P.
