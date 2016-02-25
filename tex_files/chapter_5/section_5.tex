@@ -14,10 +14,14 @@ Client side instead was create two distinct a web component for the teacher and 
 
 \subsubsection{Webinar: server side}
 To support the implementation of X-Learning I used JavaScript library PeerJS.
-PeerJS uses implementing WebRTC Browser API to provide comprehensive, configurable and easy to use that allow the creation of the peer-to-peer. With nothing more than an ID, a peer can create a P2P connection with a remote peer.Then every peer is Identified using nothing more than an ID. A string That the peer itself can choose, or have a server generated one.
-PeerJS includes within it a module called PeerServer which it can be installed on its own server and is used to provide peer id which they will use to establish the P2P connection. The official repository on GitHub even has a one-click button to deploy an instance of PeerJS Server to Heroku.
-In my case, i just want to create an instance of ExpressPeerServer in my Node.js application, and serve it at “/peerjs”
+PeerJS uses implementing WebRTC Browser API to provide comprehensive, configurable and easy to use that allow the creation of the peer-to-peer. 
 
+
+% With nothing more than an ID, a peer can create a P2P connection with a remote peer.Then every peer is Identified using nothing more than an ID. A string That the peer itself can choose, or have a server generated one.
+
+PeerJS includes within it a module called PeerServer which it can be installed on its own server and is used to provide peer id which they will use to establish the P2P connection. The official repository on GitHub even has a one-click button to deploy an instance of PeerJS Server to Heroku.
+
+In my case, i just want to create an instance of ExpressPeerServer in my Node.js application, and serve it at “/peerjs”
 
 \begin{lstlisting}[language=javascript]
 // peerjs server
@@ -29,9 +33,11 @@ In my case, i just want to create an instance of ExpressPeerServer in my Node.js
   server.listen(9000);
 \end{lstlisting}
 
+In una comunicazione P2p ogni peer deve essere identificato in maniera univoca. Quindi lato sever ogni peer che si connette a uno specifico webinar riceverà un ID univoco. 
 
+These IDs can be generated from Peer Server for each peer automatically, or we can pick one for every peer while instantiating Peer objects.
 
-Once PeerJS Server up and running, let's implement the client side of the webinar. Each peer must be uniquely identified by an ID. These IDs can be generated from Peer Server for each peer automatically, or we can pick one for every peer while instantiating Peer objects.
+% Once PeerJS Server up and running, let's implement the client side of the webinar. Each peer must be uniquely identified by an ID. These IDs can be generated from Peer Server for each peer automatically, or we can pick one for every peer while instantiating Peer objects.
 
 
 \begin{lstlisting}[language=javascript]
