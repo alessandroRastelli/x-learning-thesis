@@ -2,12 +2,13 @@
 \label{sec:x-learning_design}
 
 %%%
-Durante la fase iniziale di analisi e progettazione si è evidenziata la necessità di realizzare due micro-piattaforme public e admin. 
+Durante la fase iniziale di analisi e progettazione si è evidenziata la necessità di realizzare due piattaforme Public e Admin. 
 \begin{itemize}
 \item La piattaforma Admin side permette all'amministratore di gestire l'organico dei professori e la creazione e gestione dei corsi e dei suoi contenuti.
-\item Alla piattaforma Client side è stata invece delegata la fruizione dei contenuti.
+\item La piattaforma Public side è stata invece delegata la fruizione dei contenuti.
 \end{itemize}
-Inoltre questa scelta è dettata dalla volontà di rendere indipendenti la piattaforma admin da quella client per garantire maggiore flessibilità e garantire anche maggiore sicurezza posizionando per esempio il client in un server diverso da quello admin.
+
+Inoltre questa scelta è dettata dalla volontà di rendere indipendente la piattaforma admin da quella public per garantire maggiore flessibilità e garantire anche maggiore sicurezza posizionando per esempio quest'ultime in server diversi.
 
 
 % L’idea base è stata quella di delegare tutti compiti di creazione, gestione al lato admin e delegare invece la gestione della fruizione dei contenuti al lato client.
@@ -22,7 +23,7 @@ The process to build a web application based on x-learning toolkit consists of t
 
 
 A description of entities, properties, relations and data access policies are defined as JSON  documents.
-As to a learning platform, the essential entities to be modelled are the following: Course, Lecture, Video and Teacher(Member).
+The models of X-Learning are many and are expected to grow further with the integration and implementation of new services. At the moment there are 27 models, the essential entities modelled are the following: Manager, Course, Lecture, Video and Member.
 
 
 \subsubsection{ Model - Manager}
@@ -237,7 +238,7 @@ source.
 
  \subsubsection{ Remote Methods }
   
-  Come abbiamo detto per ogni modello vengono generate automaticamente le api dal server di Strongloop. Ogni modello rappresentato da un file JSON è anche accompagnato da un file js che di default si presenta in questo modo definito come hook
+Come abbiamo detto per ogni modello vengono generate automaticamente le API dal server di Strongloop. Ogni modello rappresentato da un file JSON è anche accompagnato da un file js che di default si presenta in questo modo ed è definito hook
   \begin{lstlisting}[language=javascript]
 
     module.exports = function (x-model) {
