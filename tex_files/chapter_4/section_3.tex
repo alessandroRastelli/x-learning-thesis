@@ -2,14 +2,15 @@
 \label{sec:x-learning_design}
 
 %%%
-Durante la fase iniziale di analisi e progettazione si è evidenziata la necessità di realizzare due piattaforme: Public e Admin. 
+During the initial analysis and design phase the necessity of the realization of two platforms has been highlighted: Public and Admin.
+
 \begin{itemize}
-\item La piattaforma Admin side permette all'amministratore di gestire l'organico dei professori e la creazione e gestione dei corsi e dei suoi contenuti.
-\item La piattaforma Public side è stata invece delegata la fruizione dei contenuti.
+\item The Admin side platform allows the administrator to manage the teacher staff and the creation along with the managment of the courses and their content.
+
+\item The Public side platform allows the fruition of the contents.
 \end{itemize}
 
-Inoltre questa scelta è dettata dalla volontà di rendere indipendente la piattaforma admin da quella public per garantire maggiore flessibilità e garantire anche maggiore sicurezza posizionando per esempio quest'ultime in server diversi.
-
+Furthermore, this choice has been driven by the will to make the admin platform independent from the public one in order to guarantee more flexibility along with more security by positioning, for example, these platforms in different servers.
 
 The process to build a web application based on x-learning toolkit consists of the following four steps: models schemas definition, HTTP RESTful API definition, UI components definition and UI components  assembly.
 
@@ -24,7 +25,7 @@ The models of X-Learning are many and are expected to grow further with the inte
 
 \subsubsection{ Model - Manager}
 
-The model Manager represents the Aministrator of platform and course creator. Its features are: role, fullname, location and is\_main\_Admin can be true o false if he is the amministrator or invitable author. The Manager has relations teaching with courses.
+The model Manager represents the platform Administrator and course creator. Its features are: role, fullname, location and is\_main\_Admin can be true or false if the Manager is the administrator or invitable author. The Manager has relations teaching with courses.
 
 \begin{lstlisting}[language=json]
 {
@@ -46,7 +47,7 @@ The model Manager represents the Aministrator of platform and course creator. It
 
 \subsubsection{ Model - Member}
 
-The model Member represents students of other course. Its features are: name, lastname, email.gender,photo,phone number,location and date. The Member has relations learning with course.
+The model Member represents students of the course. Its features are: name, lastname, email, gender, photo, phone number, location and date. The Member has relations learning with course.
 
 \begin{lstlisting}[language=json]
 {
@@ -100,7 +101,7 @@ The model Course defines the main element structure that must be published. Main
 
 \subsubsection{ Model - Lecture}
 
-The model Lecture defines the single lecture into a determinate course. Main features are: title, description. This model has relations with course, video.
+The model Lecture defines the single lecture into a specific course. Main features are: title, description. This model has relations with course, video.
 
 
 \begin{lstlisting}[language=json]
@@ -119,7 +120,7 @@ The model Lecture defines the single lecture into a determinate course. Main fea
 
 \subsubsection{ Model - Video}
 
-The model Video defines the video object belong to lecture. Main features are: title, url and duration of its. This model has relations with lecture.
+The model Video defines the video object belonging to the lecture. Main features are: title, url and duration of it. This model has relations with lecture.
 
 
 \begin{lstlisting}[language=json]
@@ -162,7 +163,7 @@ These models result in the following HTTP RESTful API, automatically generated b
 \item \textbf{POST /api/Members} Update an existing model instance or insert a new one into the data  source.
 \item \textbf{PUT /api/Members} Create a new instance of the model and persist it into the data source.
 \item \textbf{DELETE /api/Members/id} Delete a model instance by id from the data source.
-\item \textbf{GET / Members/id/learning} {\color{red} Queries students models of the course.}
+\item \textbf{GET / Members/id/learning} {\color{red} Queries student models of the course.}
 
 \item \textbf{POST /api/changeEmail} Change email of a model instance.
 \item \textbf{POST /api/changePassword} Change password of a model instance.
@@ -201,7 +202,7 @@ These models result in the following HTTP RESTful API, automatically generated b
 \item \textbf{GET /api/Lectures/id/course} Fetches belongsTO relation course.
 
 \item \textbf{GET /api/Lectures/id/video} Fetches belongsTO relation video.
-\item \textbf{GET /api/Lectures/count} Count instances of the model matched by where from the data  source.
+\item \textbf{GET /api/Lectures/count} Count instances of the model matched by where from the data source.
 \end{itemize}
 
 \subsubsection{ Images API}
@@ -243,7 +244,7 @@ source.
 
  \subsubsection{ Remote Methods }
 
-Each JSON file is also accompanied by a js file. This file is used to define the so-called “hooks” or the methods to define new APIs customized. These new APIs are added to the API generated by the JSON file.
+Each JSON file is also accompanied by a js file. This file is used to define the so-called “hooks” or the methods to define new customized APIs. These new APIs are added to the API generated by the JSON file.
 
 \begin{lstlisting}[language=javascript]
 
@@ -256,7 +257,7 @@ Each JSON file is also accompanied by a js file. This file is used to define the
 Use model hooks to add custom logic to models that extend PersistedModel. Each hook is called before or after a specific event in the model's lifecycle.
 Best practice is to register model hooks in /common/models/x-model.js
 
-Di seguito sono riportate alcuni metodi remoti che sono stati creati e un esempio esplicativo.
+A few remote methods created and an explanatory example are shown below.
 
 \begin{itemize}
 \item \textbf{GET /videos/signed\_upload\_part }
@@ -318,7 +319,7 @@ The remote method takes two parameters:
 \item the name of the method to execute the call of the API in question. In this way, the method name is “delete\_video”. This method will be executed when it is called api: “/api/Video/delete;
 \item as the second parameter, the remote method accepts a JSON object consisting of key-value pairs:
   \begin{itemize}
-    \item “accepts”: indicates the input parameters that is, parameters that are present in the body of the request. In this case the input parameter is the only one and is of type String.
+    \item “accepts”: indicates the input parameters which are parameters that are present in the body of the request. In this case the input parameter is the only one and is of type String.
     \item “returns”: It indicates what type is the response;
     \item “http”: This is a parameter that defines the type of url API.
   \end{itemize}
@@ -331,7 +332,7 @@ The remote method takes two parameters:
 The goal of this subsection is to highlight as distinct UI components can be defined, or retrieved from a collection of predefined components, configured and adapted. They represent the building blocks of the whole UI.
 
 Distinct UI components are finally mounted to compose the application views. Assembly is kept as simple as possible: it only consists of a composition of HTML5 elements. So, the entire development process results driven by: JSON documents describing entities of the application and HTML template documents describing the UI components.
-{\color{red} The following is an example: }
+The following is an example:
 
 \begin{figure}[htb] %  figure placement: here, top, bottom
  \centering
@@ -340,12 +341,12 @@ Distinct UI components are finally mounted to compose the application views. Ass
  \label{fig:fourV}
 \end{figure}
 
-In the image below shows the edit page of the course composed of the following Web component:
+The image below shows course's edit page composed by the following Web components:
 
 \begin{lstlisting}[language=html]
 <part-course-actions course="{{course}}"></part-course-actions>
 \end{lstlisting}
-this component is used to represent buttons to perform the action on the course;
+this component is used to represent buttons to perform the action in the course;
 
 \begin{lstlisting}[language=html]
 <part-course-aims course="{{course}}"></part-course-aims>
@@ -363,7 +364,7 @@ this component is used to show and change the image of the course;
 this element manages information based on a course such as the name and description;
 
 
-each component al suo interno è composto a sua volta da altri componenti come è possibile notare per esempio nel codice di part-course-info:
+Each component inside is made up, in turn, by other components. This can be seen, for example, in the part-course-info code.
 
 \begin{lstlisting}[language=html]
 <dom-module id="form-course-info">
@@ -430,16 +431,15 @@ each component al suo interno è composto a sua volta da altri componenti come �
 
 \subsection {Pages on Admin and Client side}
 \label{subsec:pages}
-Lo stesso approccio appena illustrato viene riutilizzato per creare l'intera piattaforma.
-Senza entrare nel dettaglio verrano mostrate alcune tra le principali pagine che compongono il progetto di tesi
+The same approach just illustrated is reused to create the entire platform.
+Without going into detail, a few of the main pages that compose the thesis project will be shown.
 
 \subsubsection {Pages on Admin side}
 \label{subsec:Admin_side}
 
-
 The admin side is the part of the platform that enables the Manager to manage the courses and all its sub-components such as lectures, webinars, educational material.
 
-La pagina principale si presenta cosi :
+The main page is presented as following:
 
 \begin{minipage}{\linewidth}
     \centering
@@ -451,7 +451,7 @@ La pagina principale si presenta cosi :
 The main pages that compose the admin side are:
 
 \begin{itemize}
-\item \textbf{Page Course} L'immagine seguente rappresenta la page course dove il teacher può gestire la creazione e la modifica di tutte le informazioni del corso\par
+\item \textbf{Page Course} The following image represents the course's page where the teacher can manage the creation and modification of all the course information.\par
 
 \begin{minipage}{\linewidth}
     \centering
@@ -459,7 +459,7 @@ The main pages that compose the admin side are:
     \captionof{figure}[page course admin]{page course admin}
 \end{minipage}
 
-\item \textbf{page lecture} L'immagine seguente rappresenta la page lecture dove il teacher può gestire la creazione e la modifica delle informazioni della singola lecture e inserire/cambiare il video\par
+\item \textbf{page lecture} The following image represents the lecture's page where the teacher can manage the creation and modification of the single lecture information and insert/change the video.\par
 
 \begin{minipage}{\linewidth}
     \centering
@@ -467,7 +467,7 @@ The main pages that compose the admin side are:
     \captionof{figure}[page lecture admin]{page lecture admin}
 \end{minipage}
 
-\item \textbf{page webinar} L'immagine seguente rappresenta la page lecture dove il teacher può gestire la creazione e la modifica delle informazioni di un singolo webinar\par
+\item \textbf{page webinar} The following image represents the webinar's page where the teacher can manage the creation and modification of the single webinar information.\par
 
 \begin{minipage}{\linewidth}
     \centering
@@ -475,7 +475,7 @@ The main pages that compose the admin side are:
     \captionof{figure}[page webinar admin]{page webinar admin}
 \end{minipage}
 
-\item \textbf{Page Team} raffigura la pagina in cui l'amministratore può gestire l'organico dei docenti che possono collaborare nella piattaforma\par
+\item \textbf{Page Team} The following image represents the page in which the administrator can manage the teacher staff that can collaborate with the platform.\par
 
 \begin{minipage}{\linewidth}
     \centering
@@ -483,7 +483,7 @@ The main pages that compose the admin side are:
     \captionof{figure}[page team]{page team}
 \end{minipage}
 
-\item \textbf{Page Services} raffigura la pagina in cui l'amministratore può gestire l'inserimento dei codici dei vari servizi utilizzati nella piattaforma\par
+\item \textbf{Page Services} The following image represents the page in which the administrator can manage the insertion of various service codes utilized in the platform.\par
 
 \begin{minipage}{\linewidth}
     \centering
@@ -496,12 +496,13 @@ The main pages that compose the admin side are:
 
 \subsubsection {Client side}
 \label{subsec:Client_side}
-The client side is the part of the platform that allows users to view courses and then attend lectures, webinars and access to educational materials.
+The client side is the part of the platform that allows users to view courses and then attend lectures, webinars and access educational materials.
+
 The main pages that compose the client side are:
 
 \begin{itemize}
 
-\item \textbf{page home} L'immagine seguente rappresenta la Page Home dove lo student può cercare un determinato corso, vedere quelli disponibili, e eventualmente filtrari per categoria\par
+\item \textbf{page home} The following image represents the Home Page where the student can search for a specific course, see those that are available and possibly filter them by category.\par
 
 \begin{minipage}{\linewidth}
     \centering
@@ -510,7 +511,7 @@ The main pages that compose the client side are:
 \end{minipage}
 
 
-\item \textbf{page course} L'immagine seguente rappresenta la Page Course dove è possibile trovare tutte le informazioni che compongono il corso quali costo, review, video lezioni, materiale didattico \par
+\item \textbf{page course} The following image represents the Page Course where all information which composes the course can be found, such as cost, review, video lectures and educational material.\par
 \begin{minipage}{\linewidth}
     \centering
     \includegraphics[width=1.0\linewidth]{images/chapter4/page-course.png}
@@ -518,7 +519,7 @@ The main pages that compose the client side are:
 \end{minipage}
 
 
-\item \textbf{page lecture} L'immagine seguente rappresenta la Page lecture che permette la visualizzazione della video lezione\par
+\item \textbf{page lecture} The following image represents the page lecture which can allow video lecture visualization.\par
 
 \begin{minipage}{\linewidth}
     \centering
@@ -527,7 +528,7 @@ The main pages that compose the client side are:
 \end{minipage}
 
 
-\item \textbf{page webinar} L'immagine seguente rappresenta la Page Webinar che permette di collegarsi in tempo reale al webinar di un determianto corso\par
+\item \textbf{page webinar} The following image represents the Page Webinar which allows to connect to the webinar of a specific course in real time.\par
 \begin{minipage}{\linewidth}
     \centering
     \includegraphics[width=1.0\linewidth]{images/chapter4/page-webinar.png}
