@@ -102,13 +102,10 @@ sqs.receiveMessage(receiveMessageParams, receiveMessageCallback);
       var s3_params = {
         Bucket: S3_BUCKET,
         Delete: { 
-          Objects: [ 
-            {
-              Key: key
-            }
-          ]
+          Objects: [ { Key: key } ]
         }
       };
+      
       s3.deleteObjects(s3_params,deleteObjCallback)
       sqs.deleteMessage(deleteMessageParams, deleteMessageCallback);
     }
