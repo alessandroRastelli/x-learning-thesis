@@ -3,17 +3,20 @@
 
 Through the platform of e-learning, the student will find their own course of interest selecting it from those available.
 The user chosen and eventually paid the course,then he can start his training.
-Also for streaming it has created a web component that allows the video vision, hiding all encountered problems on the thesis work and complexity that shown in chapter 2.
+
+Also for streaming it has created a web component that allows the video vision, hiding all encountered problems and complexity resolved on the thesis work see(\ref{sec:HLS and VideoJS}).
 
 \begin{lstlisting}[language=html]
-       <deck-video src="{{lecture.video}}"></deck-video>
+  <deck-video src="{{lecture.video}}"></deck-video>
 \end{lstlisting}
 
-The final result will be a player to stream video content as you can see in the picture
+tale web component incapsula tutte le librerie e lo stile css necessari alla fruizione di un qualsiasi video in formto m3u8 che viene passato attraverso un url.
+
+The final result will be a player to stream video content in qualsiasi web browser as you can see in the picture
 
 \begin{figure}[htb]
  \centering
  \includegraphics[width=1.0\linewidth]{images/chapter6/deck_video.png}\hfill
- \caption[Deck video]{Deck video}
+ \caption[Video player]{Video player}
  \label{fig:fourV}
 \end{figure}
