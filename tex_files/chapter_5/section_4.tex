@@ -1,18 +1,17 @@
 \section{Streaming video}
 \label{sec:attend_the_course}
 
-Through the platform of e-learning, the student will find their own course of interest selecting it from those available.
-The user chosen and eventually paid the course,then he can start his training.
+Through the platform of e-learning, the student will find their own course of interest by selecting it from those available.
+The user chooses and pays for the course (if it is not free), then he can start his training.
 
-Also for streaming it has created a web component that allows the video vision, hiding all encountered problems and complexity resolved on the thesis work see(\ref{sec:HLS and VideoJS}).
+A web component has been created for streaming as well. This allows the video vision, hiding all encountered problems and complexity, which is resolved in the thesis work see(\ref{sec:HLS and VideoJS}).
 
 \begin{lstlisting}[language=html]
   <deck-video src="{{lecture.video}}"></deck-video>
 \end{lstlisting}
+This web component collects all of the libraries and the CSS necessary to see any video in a m3u8 format, which is passed through a URL.
 
-tale web component incapsula tutte le librerie e lo stile css necessari alla fruizione di un qualsiasi video in formto m3u8 che viene passato attraverso un url.
-
-The final result will be a player to stream video content in qualsiasi web browser as you can see in the picture
+The final result will be a player to stream video content in any web browser as you can see in the picture below.
 
 \begin{figure}[htb]
  \centering

@@ -3,26 +3,25 @@
 \label{sec:RealTimeVideo}
 
 %%%%
-X-Learning in addition to video streaming are given the opportunity to the teacher to schedule webinars.
-The webinar is a live event, allowing more people to connect live to participate in an interactive lesson, a training course, a workshop or conference. Just like in real classroom we find ourselves at the scheduled time and everyone has the opportunity to attend and speak at the event to ask questions and share ideas.
-To achieve this feature has been adopted WebRTC useful in all contexts of video conference.
+X-Learning in addition to video streaming gives the teacher the opportunity to schedule webinars.
+The webinar is a live event, that allows more people to connect live to participate in interactive lessons, training courses, workshops or conferences. Just like in real classrooms, everyone has the opportunity to attend, speak, ask questions and share ideas.
+To achieve this feature, the WebRTC has been adopted. This is useful in all contexts of video conference.
 %%%%
 
 %For the creation of server side webinar it was used PeerJs that allows the establishment and management of video conferences in a more simple and cleaner than WebRTC.
 
-Client side instead was create two distinct a web component for the teacher and one for the student wishing to connect to the webinar.
+Client side, instead, two distinct web component were created, one for the teacher and one for the student wishing to connect to the webinar.
 
 \subsubsection{Webinar: server side}
-To support the implementation in X-Learning has been used PeerJS a JavaScript library.
-PeerJS uses implementing WebRTC Browser API to provide comprehensive, configurable and easy to use that allow the creation of the peer-to-peer. 
+To support the implementation in X-Learning, PeerJS has been used which is a JavaScript library.
+PeerJS uses an implementing WebRTC Browser API which makes it comprehensive, configurable and easy to use and allows the creation of the peer-to-peer connection. 
 
 
 % With nothing more than an ID, a peer can create a P2P connection with a remote peer.Then every peer is Identified using nothing more than an ID. A string That the peer itself can choose, or have a server generated one.
 
-PeerJS includes within it a module called PeerServer which it can be installed on its own server and is used to provide peer id which they will use to establish the P2P connection. The official repository on GitHub even has a one-click button to deploy an instance of PeerJS Server to Heroku.
+PeerJS includes within it a module called PeerServer which can be installed on its own server and is used to provide a peer id, which they will use to establish the P2P connection. The official repository on GitHub even has a one-click button to deploy an instance of PeerJS Server to Heroku.
 
-%%in x-learning invece è stata creata
-In X-Learning was create an instance of ExpressPeerServer in Node.js application, and serve it at “/peerjs”
+X-Learning, instead, was created an instance of ExpressPeerServer in Node.js application, and served it at “/peerjs”
 
 \begin{lstlisting}[language=javascript]
 // peerjs server
@@ -33,10 +32,9 @@ In X-Learning was create an instance of ExpressPeerServer in Node.js application
 
   server.listen(9000);
 \end{lstlisting}
+In a P2P comunication, every peer must be identified in a unique way. So, in this way, each peer that connects to a specific webinar will receive a unique ID from the server side.
 
-In una comunicazione P2p ogni peer deve essere identificato in maniera univoca. Quindi lato sever ogni peer che si connette a uno specifico webinar riceverà un ID univoco. 
-
-These IDs can be generated from Peer Server for each peer automatically, or we can pick one for every peer while instantiating Peer objects.
+These IDs can be generated from Peer Server for each peer automatically, or one can be picked for every peer while instantiating Peer objects.
 
 % Once PeerJS Server up and running, let's implement the client side of the webinar. Each peer must be uniquely identified by an ID. These IDs can be generated from Peer Server for each peer automatically, or we can pick one for every peer while instantiating Peer objects.
 
@@ -45,37 +43,41 @@ These IDs can be generated from Peer Server for each peer automatically, or we c
 var peer = this.peer = new Peer( { host: 'localhost', port: 9000, path: '/peerjs'});
 \end{lstlisting}
 
-As mentioned I want each peer is uniquely identified for this as we can see in the code above I have intentionally omitted the id and so PeerServer manage directly the choice and to ensure uniqueness.
-The other options included in the creation of peer contain information such as host, port, path.
+As mentioned, X-learning wants each peer to be uniquely identified. For this reason, as shown in the code above, the ID has been intentionally omitted and so PeerServer can manage directly the choice and can ensure uniqueness.
+The other options included in the peer creation contain information such as host, port, path.
 
 
-Once known ids of all peers can establish the connection through the method
-peer.connect (destId) where destId in my case is the id of the teacher that is on hold.
+Once every ID of all peers is known, the connection through the method peer.connect (destID) can be established. DestID in this case is the ID of the teacher that is on hold.
 
 \subsubsection{Webinar: client side}
 
-Client side there is a distinction between teacher and student. Specifically, I created two Web Component:
+In client side there is a distinction between teacher and student. Specifically, two Web Components were created in the thesis project:
 \begin{enumerate}
 
-\item The Web component in admin side can be invoked through the following snippet.
-The use of such component performs the following operations:
-\begin{itemize}
-\item requires an id to the server listens
-\item persists id webinar into model Webinar throght loopback(Mongodb)
-\item sets up the call
-\item waits
-\end{itemize}
+\item The Web component in admin side can be invoked through the following code snippet.
 
 \begin{lstlisting}[language=html]
  <deck-p2p-admin data="{{data.webinar}}" on-peer="on_peer"></deck-p2p-admin>
 \end{lstlisting}
 
-\item The web component in client side instead allows a user enrolled in a course and interested in the webinar to be able to access the content.
+
+The use of such component performs the following operations:
+\begin{itemize}
+\item requires an id to the server listening
+\item persists id webinar into model Webinar throughout loopback(Mongodb)
+\item sets up the call
+\item waits
+\end{itemize}
+
+
+\item 
+The web component in the client side, instead, allows a user enrolled in a course and is interested in one of their webinars to access the content.
+
 The use of this component performs the following operations:
 \begin{itemize}
-\item performs a GET to get the id of communication
-\item requires an id to the server PeerJs
-\item establishes a connection with the call of the teacher
+\item performs a GET to obtain the id of communication
+\item asks for an id to the server PeerJs
+\item establishes a connection with the teacher's call
 \item shows the video content in real time
 \end{itemize}
 

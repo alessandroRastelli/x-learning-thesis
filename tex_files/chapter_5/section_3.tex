@@ -1,8 +1,8 @@
 \section{Video Transcoder}
 \label{sec:video_transcoder}
 
+Once the upload process described is ended, the transcoding phase begins. The video uploaded on S3 is taken over and processed by Elastic Transcoder, and will produce a file with a .m3u8 format in output. This allows the HLS streaming with the advantages illustrated in the previous chapters. The follwing image shows the general function and idea of where the stream that starts from Bucket S3 goes through a TranscodingPipeline where the video is converted and uploaded to S3 once again.
 
-Terminato il processo di upload appena descritto inizia la fase di transcodifica, il video appena caricato su S3 viene preso in carico dal servizio di Elastic Transcoder, processato e in output si avrà un file con formato .m3u8 che permette quindi lo streaming HLS con i vantaggi illustrati nei capitoli precedenti. L’idea alla base e il funzionamento generale si evince dall’immagine seguente dove vediamo il flusso che parte da il Bucket S3 passa per una TranscodingPipeline dove il video viene convertito e nuovamente caricato su S3. 
 
 \begin{figure}[htb]
  \centering
@@ -10,14 +10,15 @@ Terminato il processo di upload appena descritto inizia la fase di transcodifica
  \caption[The Elastic Transcoder Model]{The Elastic Transcoder Model}
  \label{fig:fourV}
 \end{figure}
+In detail, the transcoding begins at the end of the MultipartUpload when the server calls API PUT /transcoders/createJob which takes in input the following parameters:
 
-Entrando nel dettaglio la transcodifica inizia al termine del MultipartUpload quando il server chiama API PUT /transcoders/createJob che prende in input i seguenti paramteri :
 \begin{itemize}
-      \item file\_name ovvero il file name che deve essere preso dal bucket per poi essere trasformato
-      \item path ovvero il percorso remoto su cui effettuare lo storage quando termina la transcodifica
-  \end{itemize}
+      \item file\_name is the file name that must be taken from the bucket so it can later be transformed.
 
- Tale API inizia la comunicazione con il servizio di ElasticTranscoder e crea quindi un nuovo JOB che verra inserito nella Pipeline specificata nel campo PipelineId.
+      \item path is the remote path where the storage can be put into effect when the transcoding is completed.
+  \end{itemize}
+This API begins the comunication with the ElasticTranscoder service and in this way creates a new JOB which will be inserted into the Pipeline that is specified in the PipelineID field.
+
 \begin{lstlisting}[language=html]
   
 Transcoder.createJob = function (file_name,path,callback){
@@ -61,25 +62,27 @@ Transcoder.createJob = function (file_name,path,callback){
   });
 \end{lstlisting}
 
-Nel seguente codice è possibile vedere come il server nella richiesta specifica un PiepelineId ovvero un ID corrispondente a una determinata Pipeline dove il job in questione verra inserito.
-Un altro dato necessario richiesto dalle API è il PresetId che invece rappresenta ID del Preset che come già accennato nel capitolo 2 rappresenta are templates that contain most of the settings for transcoding media files from one format to another.
-L’immagine seguente mostra la pipeline utilizzata durante la fase di test della piattaforma di X-learning.
+In the following code, it can be seen how the server in the request specifies a PipelineID. This is an ID that corrisponds to a certain Pipeline, where the job in question will be inserted.
 
+Another parameter necessary requested by the API is the PresetID, which represents the ID of the Preset. The Preset see(\ref{sec:Amazon Elastic Transcoder}) is a template that contains most of the settings for transcoding media files from one format to another.
+
+The following image shows the Pipeline used during the testing phase of the X-learning platform.
 
 \begin{minipage}{\linewidth}
     \centering
     \includegraphics[width=1.0\linewidth]{images/chapter6/elastic_pipeline.png}
-    \captionof{figure}[Web Components]{Video upload}
+    \captionof{figure}[Web Components]{X-Learning Pipeline}
 \end{minipage}
+It is also possible to see how in the Pipeline “arn:aws:sns:us-west-2:090870039614:x-learning” is specified, which represents the Amazon Simple Notification Service that is a distributed publish-subscribe system. 
+This service see(\ref{sec:Amazon SNS and SQS}) is used with the SQS service, which is a queue with the transcoding results.
 
+These results within the SQS are received as notifications by the platform that the server side analyzes in order to:
 
-E' possibile notare inoltre, come nella pipeline viene specificato anche “arn:aws:sns:us-west-2:090870039614:x-learning” che rappresenta il serivizio Amazon Simple Notification Service is a distributed publish-subscribe system.
-Tale servizio descritto nel capitolo 2 viene utilizzato insieme al servizio SQS, una queue con gli esisti della transcodifica.
-Tali risultati all'interno della SQS vengono ricevuti come notifica nella piattaforma che server side li analizza in modo da poter:
 
 \begin{itemize}
-\item rendere il corso disponibile per la pubblicazione e quindi fruibile ai Members
-\item liberare spazio sul bucket S3 eliminando il video nel formato originale
+\item make the course available for publication and accessible to students (Member).
+
+\item free up space on the S3 bucket by eliminating the video in the original format.
 
 \begin{lstlisting}[language=javascript]
 
