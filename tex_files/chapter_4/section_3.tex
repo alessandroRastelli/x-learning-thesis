@@ -257,6 +257,7 @@ Each JSON file is also accompanied by a js file. This file is used to define the
 
 Use model hooks to add custom logic to models that extend PersistedModel. Each hook is called before or after a specific event in the model's lifecycle.
 Best practice is to register model hooks in /common/models/x-model.js
+
 Di seguito sono riportate alcuni metodi remoti che sono stati creati e un esempio esplicativo.
 
 \begin{itemize}
@@ -326,7 +327,7 @@ The remote method takes two parameters:
 \end{itemize}
 
 
-\subsection {UI components definition & assembly}
+\subsection {UI components definition \& assembly}
 \label{subsec:components_definition}
 % This subsection explains the main pages admin and client side that make up the platform, and then we will focus on the following pages.
 The goal of this subsection is to highlight as distinct UI components can be defined, or retrieved from a collection of predefined components, configured and adapted. They represent the building blocks of the whole UI.
@@ -346,71 +347,94 @@ In the image below shows the edit page of the course composed of the following W
 \begin{lstlisting}[language=html]
 <part-course-actions course="{{course}}"></part-course-actions>
 \end{lstlisting}
-
-
-\begin{figure}[htb] %  figure placement: here, top, bottom
- \centering
- \includegraphics[width=1.0\linewidth]{images/chapter4/admin-course-actions.png}\hfill
- \caption[Page Admin course action]{Page Admin course action}
- \label{fig:fourV}
-\end{figure}
+this component is used to represent buttons to perform the action on the course;
 
 \begin{lstlisting}[language=html]
-<part-course-info course="{{course}}" error="{{error}}"></part-course-info>
+<part-course-aims course="{{course}}"></part-course-aims>
+\end{lstlisting}
+this component is used to insert the aims of the course;
+
+\begin{lstlisting}[language=html]
+<part-course-image course="{{course}}"></part-course-image>
+\end{lstlisting}
+this component is used to show and change the image of the course;
+
+\begin{lstlisting}[language=html]
+<part-course-info course="{{course}}"></part-course-info>
+\end{lstlisting}
+this element manages information based on a course such as the name and description;
+
+
+each component al suo interno è composto a sua volta da altri componenti come è possibile notare per esempio nel codice di part-course-info:
+
+\begin{lstlisting}[language=html]
+<dom-module id="form-course-info">
+  <template>
+    <style include="style-form"></style>
+
+    <form on-submit="on_submit">
+      <div class="field">
+        <paper-input label="Title" id="title" type="text" value="{{course.title}}"></paper-input>
+        <paper-textarea label="Description" value="{{course.description}}"></paper-textarea>
+      
+        <paper-input label="Language" id="title" type="text" value="{{course.language}}"></paper-input>
+        <paper-input label="Cost" id="title" type="number" value="{{course.cost}}"></paper-input>
+      </div>
+      <div class="field">
+        <search-course-category course="{{course}}" on-try-save-categories="on_try_save_categories" on-try-delete-category="on_try_delete_category"></search-course-category>
+      </div>
+    </form>
+
+  </template>
+</dom-module>
 \end{lstlisting}
 
 
+% Also as you can see on the page is given the opportunity to manage the different components of the course:
+% \begin{itemize}
 
-\begin{minipage}{\linewidth}
-    \centering
-    \includegraphics[width=1.0\linewidth]{images/chapter4/admin-course-info.png}
-    \captionof{figure}[Page Admin course info]{Page Admin course info}
-\end{minipage}
+% \item \textbf{Image section}\par
+% \begin{itemize}
+%   \item add the image of the course
+%   \item change the image of the course
+% \end{itemize}
 
-Also as you can see on the page is given the opportunity to manage the different components of the course:
-\begin{itemize}
+% \item \textbf{Aims section} permette di inserire:
 
-\item \textbf{Image section}\par
-\begin{itemize}
-  \item add the image of the course
-  \item change the image of the course
-\end{itemize}
+% \begin{itemize}
+%   \item At the end of my course, students will be able to
+%   \item Who is advised to follow this course, and who is not ?
+%   \item What students need to know or do before you start your course ?
+% \end{itemize}
 
-\item \textbf{Aims section} permette di inserire:
-
-\begin{itemize}
-  \item At the end of my course, students will be able to
-  \item Who is advised to follow this course, and who is not ?
-  \item What students need to know or do before you start your course ?
-\end{itemize}
-
-\item \textbf{Lectures section}\par 
-\begin{itemize}
-  \item manage the lessons of the course and so change and elimination
-  \item link to the page for creating a new lesson that lets you enter information such as title description and upload the video  
-\end{itemize}
+% \item \textbf{Lectures section}\par 
+% \begin{itemize}
+%   \item manage the lessons of the course and so change and elimination
+%   \item link to the page for creating a new lesson that lets you enter information such as title description and upload the video  
+% \end{itemize}
 
 
-\item \textbf{Webinar section}\par
-\begin{itemize}
-  \item manage the webinar of the course and so change and elimination
-  \item link to the page for creating a new lesson that lets you enter information such as title description and set the date
-\end{itemize}
+% \item \textbf{Webinar section}\par
+% \begin{itemize}
+%   \item manage the webinar of the course and so change and elimination
+%   \item link to the page for creating a new lesson that lets you enter information such as title description and set the date
+% \end{itemize}
 
 
-\item \textbf{Document}\par
-\begin{itemize}
-  \item add documents to the course
-  \item remove documents from the course
-\end{itemize}
+% \item \textbf{Document}\par
+% \begin{itemize}
+%   \item add documents to the course
+%   \item remove documents from the course
+% \end{itemize}
 
-\end{itemize}
+% \end{itemize}
 
 
 \subsection {Pages on Admin and Client side}
 \label{subsec:pages}
 Lo stesso approccio appena illustrato viene riutilizzato per creare l'intera piattaforma.
 Senza entrare nel dettaglio verrano mostrate alcune tra le principali pagine che compongono il progetto di tesi
+
 \subsubsection {Pages on Admin side}
 \label{subsec:Admin_side}
 
@@ -437,7 +461,7 @@ The main pages that compose the admin side are:
     \captionof{figure}[page course admin]{page course admin}
 \end{minipage}
 
-\item \textbf{page lecture} L'immagine seguente rappresenta la page lecture dove il teacher può gestire la creazione e la modifica di tutte le informazioni della singola lecture\par
+\item \textbf{page lecture} L'immagine seguente rappresenta la page lecture dove il teacher può gestire la creazione e la modifica delle informazioni della singola lecture e inserire/cambiare il video\par
 
 \begin{minipage}{\linewidth}
     \centering
@@ -445,7 +469,7 @@ The main pages that compose the admin side are:
     \captionof{figure}[page lecture admin]{page lecture admin}
 \end{minipage}
 
-\item \textbf{page webinar} L'immagine seguente rappresenta la page lecture dove il teacher può gestire la creazione e la modifica di tutte le informazioni di un singolo webinar\par
+\item \textbf{page webinar} L'immagine seguente rappresenta la page lecture dove il teacher può gestire la creazione e la modifica delle informazioni di un singolo webinar\par
 
 \begin{minipage}{\linewidth}
     \centering
