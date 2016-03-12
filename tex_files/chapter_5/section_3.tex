@@ -10,6 +10,7 @@ Once the upload process described is ended, the transcoding phase begins. The vi
  \caption[The Elastic Transcoder Model]{The Elastic Transcoder Model}
  \label{fig:fourV}
 \end{figure}
+
 In detail, the transcoding begins at the end of the MultipartUpload when the server calls API PUT /transcoders/createJob which takes in input the following parameters:
 
 \begin{itemize}
@@ -68,11 +69,14 @@ Another parameter necessary requested by the API is the PresetID, which represen
 
 The following image shows the Pipeline used during the testing phase of the X-learning platform.
 
-\begin{minipage}{\linewidth}
-    \centering
-    \includegraphics[width=1.0\linewidth]{images/chapter5/elastic_pipeline.png}
-    \captionof{figure}[Web Components]{X-Learning Pipeline}
-\end{minipage}
+
+\begin{figure}[htb]
+ \centering
+ \includegraphics[width=1.0\linewidth]{images/chapter5/elastic_pipeline.png}\hfill
+ \caption [X-Learning Pipeline]{X-Learning Pipeline}
+ \label{fig:fourV}
+\end{figure}
+
 It is also possible to see how in the Pipeline “arn:aws:sns:us-west-2:090870039614:x-learning” is specified, which represents the Amazon Simple Notification Service that is a distributed publish-subscribe system. 
 This service see(\ref{sec:Amazon SNS and SQS}) is used with the SQS service, which is a queue with the transcoding results.
 
